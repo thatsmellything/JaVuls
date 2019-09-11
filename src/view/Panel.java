@@ -68,6 +68,12 @@ public class Panel extends JPanel
 	{
 		this.setLayout(appLayout);
 		this.setPreferredSize(new Dimension(1024, 768));
+		
+		//adding things to the panel
+		this.add(buttonPanelLeft);
+		
+		//making those things have some structure
+		buttonPanelLeft.setPreferredSize(new Dimension(80, 500));
 	}
 	
 	private void setupListeners()
