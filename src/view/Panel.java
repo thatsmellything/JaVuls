@@ -11,6 +11,23 @@ import controller.Controller;
 import controller.IOController;
 
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.*;
+
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import javax.swing.*;
+import javax.swing.text.*;
+import javax.swing.text.DefaultHighlighter.DefaultHighlightPainter;
+import javax.swing.event.*;
+import javax.swing.GroupLayout.*;
+
+import javax.swing.*;
+
 public class Panel extends JPanel
 {
 
@@ -71,9 +88,12 @@ public class Panel extends JPanel
 		
 		//adding things to the panel
 		this.add(buttonPanelLeft);
+		this.add(URLInput);
+		this.add(IPInput);
+		this.add(NickName);
 		
 		//making those things have some structure
-		buttonPanelLeft.setPreferredSize(new Dimension(80, 500));
+		
 	}
 	
 	private void setupListeners()
