@@ -1,7 +1,12 @@
 package controller;
 
 import view.*;
+
+import java.net.UnknownHostException;
+
 import javax.swing.JOptionPane;
+
+import applications.YourIPLookup;
 
 
 

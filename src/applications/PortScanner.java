@@ -11,7 +11,7 @@ import java.net.InetSocketAddress;
     import java.util.concurrent.Future;
     import java.util.concurrent.TimeUnit;
 
-    class PortScanner {
+    public class PortScanner {
 
     public static void main(final String... args) throws InterruptedException, ExecutionException 
     {

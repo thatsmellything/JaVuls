@@ -9,7 +9,14 @@ public class YourIPLookup {
 	    public static String getLocalIP() throws UnknownHostException
 	    {
 	        InetAddress inetAddress = InetAddress.getLocalHost();
-	        System.out.println("IP Address:- " + inetAddress.getHostAddress());
+	        
+	        return inetAddress.toString();
+	    }
+	    
+	    public static String viewMyIP() throws UnknownHostException
+	    {
+	    	InetAddress inetAddress = InetAddress.getLocalHost();
+	    	System.out.println("IP Address:- " + inetAddress.getHostAddress());
 	        System.out.println("Host Name:- " + inetAddress.getHostName());
 	        return inetAddress.toString();
 	    }
