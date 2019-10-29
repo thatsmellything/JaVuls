@@ -14,9 +14,15 @@ public class WindowsCommandLineIPandPing
 	
 	
 	
-	public static void main(String[] args) throws IOException
+	public static void main(String[] args)
 	{
+		windowsPing();
+		
+
+	}
 	
+	public static void windowsPing()
+	{
 		Runtime rt = Runtime.getRuntime();
 		WindowsCommandLineIPandPing rte = new WindowsCommandLineIPandPing();
 		printOutput errorReported, outputMessage;
@@ -35,7 +41,6 @@ public class WindowsCommandLineIPandPing
 		{
 			e.printStackTrace();
 		}
-
 	}
 	
 	
