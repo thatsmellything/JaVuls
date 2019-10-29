@@ -16,12 +16,12 @@ public class WindowsCommandLineIPandPing
 	
 	public static void main(String[] args)
 	{
-		windowsPing();
-		
-
+		//windowsPing(null);
+		//windowsNmap();
+		windowsARP();
 	}
 	
-	public static void windowsPing()
+	public static void windowsPing(String pingy)
 	{
 		Runtime rt = Runtime.getRuntime();
 		WindowsCommandLineIPandPing rte = new WindowsCommandLineIPandPing();
@@ -32,7 +32,7 @@ public class WindowsCommandLineIPandPing
 		//Process p = Runtime.getRuntime().exec("ping google.com");
 		//Logic that happens with the command line thing in windows
 			
-		Process proc = rt.exec("ping google.com");
+		Process proc = rt.exec("ping " + pingy);
 		errorReported = rte.getStreamWrapper(proc.getErrorStream(), "ERROR");
 		outputMessage = rte.getStreamWrapper(proc.getInputStream(), "OUTPUT");
 		errorReported.start();
@@ -41,6 +41,68 @@ public class WindowsCommandLineIPandPing
 		{
 			e.printStackTrace();
 		}
+		
+		
+	}
+	
+	public static void windowsIPConfig()
+	{
+		Runtime rt = Runtime.getRuntime();
+		WindowsCommandLineIPandPing rte = new WindowsCommandLineIPandPing();
+		printOutput errorReported, outputMessage;
+		try{
+			//Process p = Runtime.getRuntime().exec("ping google.com");
+			//Logic that happens with the command line thing in windows
+				
+			Process proc = rt.exec("IPConfig");
+			errorReported = rte.getStreamWrapper(proc.getErrorStream(), "ERROR");
+			outputMessage = rte.getStreamWrapper(proc.getInputStream(), "OUTPUT");
+			errorReported.start();
+			outputMessage.start();
+			} catch (IOException e)
+			{
+				e.printStackTrace();
+			}
+	}
+	
+	public static void windowsNmap()
+	{
+		Runtime rt = Runtime.getRuntime();
+		WindowsCommandLineIPandPing rte = new WindowsCommandLineIPandPing();
+		printOutput errorReported, outputMessage;
+		try{
+			//Process p = Runtime.getRuntime().exec("ping google.com");
+			//Logic that happens with the command line thing in windows
+				
+			Process proc = rt.exec("IPConfig");
+			errorReported = rte.getStreamWrapper(proc.getErrorStream(), "ERROR");
+			outputMessage = rte.getStreamWrapper(proc.getInputStream(), "OUTPUT");
+			errorReported.start();
+			outputMessage.start();
+			} catch (IOException e)
+			{
+				e.printStackTrace();
+			}
+	}
+	
+	public static void windowsARP()
+	{
+		Runtime rt = Runtime.getRuntime();
+		WindowsCommandLineIPandPing rte = new WindowsCommandLineIPandPing();
+		printOutput errorReported, outputMessage;
+		try{
+			//Process p = Runtime.getRuntime().exec("ping google.com");
+			//Logic that happens with the command line thing in windows
+				
+			Process proc = rt.exec("arp -a ");
+			errorReported = rte.getStreamWrapper(proc.getErrorStream(), "ERROR");
+			outputMessage = rte.getStreamWrapper(proc.getInputStream(), "OUTPUT");
+			errorReported.start();
+			outputMessage.start();
+			} catch (IOException e)
+			{
+				e.printStackTrace();
+			}
 	}
 	
 	

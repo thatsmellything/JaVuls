@@ -20,7 +20,9 @@ public class Tests
 			
 			YourIPLookup.getLocalIP();
 			YourIPLookup.viewMyIP();
+			WindowsCommandLineIPandPing.windowsPing("8.8.8.8");
 			PortScanner.main(YourIPLookup.getLocalIP().toString());
+			
 			} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
