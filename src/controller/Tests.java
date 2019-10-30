@@ -37,6 +37,10 @@ public class Tests
 					Thread.currentThread().interrupt();
 				}
 			}
+			else
+			{
+				LinuxPing.main(args);
+			}
 			
 			
 			//Runs the port scanner

@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.concurrent.TimeUnit;
  
 /**
  * @author Crunchify.com 
@@ -47,10 +48,11 @@ public class LinuxPing {
 		crunchifyResultFromCommand crunchifyError, crunchifyResult;
  
 		try {
-			Process proc = crunchifyRuntime.exec("curl -v https://www.google.com");
-			Process proc1 = crunchifyRuntime.exec("ping crunchify.com");
-			crunchifyError = rte.getStreamResult(proc1.getErrorStream(), "ERROR");
-			crunchifyResult = rte.getStreamResult(proc1.getInputStream(), "OUTPUT");
+			
+			Process proc2 = crunchifyRuntime.exec("ping crunchify.com");
+			
+			crunchifyError = rte.getStreamResult(proc2.getErrorStream(), "ERROR");
+			crunchifyResult = rte.getStreamResult(proc2.getInputStream(), "OUTPUT");
 			crunchifyError.start();
 			crunchifyResult.start();
  
@@ -58,7 +60,73 @@ public class LinuxPing {
 		} catch (IOException exception) {
 			exception.printStackTrace();
 		}
+		
+		try {
+		    
+			TimeUnit.SECONDS.sleep(5);
+		} catch (InterruptedException ie) {
+			Thread.currentThread().interrupt();
+		}
+		
+		try {
+			Process proc1 = crunchifyRuntime.exec("curl -v 8.8.8.8");
+			
+			crunchifyError = rte.getStreamResult(proc1.getErrorStream(), "ERROR");
+			crunchifyResult = rte.getStreamResult(proc1.getInputStream(), "OUTPUT");
+			
+			crunchifyError.start();
+			crunchifyResult.start();
  
+			// Signals that an I/O exception of some sort has occurred.
+		} catch (IOException exception) {
+			exception.printStackTrace();
+		}
+		
+		
+		
+ 
+	}
+	public static void LinuxPing(String w)
+	{
+		// Returns the runtime object associated with the current Java application.
+				Runtime crunchifyRuntime = Runtime.getRuntime();
+				LinuxPing rte = new LinuxPing();
+				crunchifyResultFromCommand crunchifyError, crunchifyResult;
+		 
+				try {
+					
+					Process proc2 = crunchifyRuntime.exec("ping " + w);
+					
+					crunchifyError = rte.getStreamResult(proc2.getErrorStream(), "ERROR");
+					crunchifyResult = rte.getStreamResult(proc2.getInputStream(), "OUTPUT");
+					crunchifyError.start();
+					crunchifyResult.start();
+		 
+					// Signals that an I/O exception of some sort has occurred.
+				} catch (IOException exception) {
+					exception.printStackTrace();
+				}
+	}
+	
+	public static void LinuxCurl(String w)
+	{
+		// Returns the runtime object associated with the current Java application.
+				Runtime crunchifyRuntime = Runtime.getRuntime();
+				LinuxPing rte = new LinuxPing();
+				crunchifyResultFromCommand crunchifyError, crunchifyResult;
+		try {
+			Process proc1 = crunchifyRuntime.exec("curl -v 8.8.8.8");
+			
+			crunchifyError = rte.getStreamResult(proc1.getErrorStream(), "ERROR");
+			crunchifyResult = rte.getStreamResult(proc1.getInputStream(), "OUTPUT");
+			
+			crunchifyError.start();
+			crunchifyResult.start();
+ 
+			// Signals that an I/O exception of some sort has occurred.
+		} catch (IOException exception) {
+			exception.printStackTrace();
+		}
 	}
  
 }
