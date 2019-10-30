@@ -13,7 +13,7 @@ public class AddABreak {
 		}
 	}
 	
-	public void addBreak(int s)
+	public static void addBreak(int s)
 	{
 		try {
 		    
