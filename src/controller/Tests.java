@@ -29,13 +29,8 @@ public class Tests
 			if (localOS.equals("Windows 10"))
 			{
 				WindowsCommandLineIPandPing.windowsPing("8.8.8.8");
-			
-				try {
-			    
-					TimeUnit.SECONDS.sleep(5);
-				} catch (InterruptedException ie) {
-					Thread.currentThread().interrupt();
-				}
+				controller.AddABreak.addBreak(5);
+				
 			}
 			else
 			{
