@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 
 public class WifiIPPinger {
 	
-	static String getMYIP()
+/*	static String getMYIP()
     {
         String n=null;
         try
@@ -52,5 +52,7 @@ public class WifiIPPinger {
 	public static void main(String[] args)
 	{
 		
+	
 	}
+	*/
 }

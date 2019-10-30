@@ -14,7 +14,7 @@ public class Tests
 
 	public static void main(String[] args)
 	{
-		//creates a string of the operating system for future useage
+		//creates a string of the operating system for future usage
 		String localOS = ShowProperties.getOperatingSystem();
 		
 		try {
