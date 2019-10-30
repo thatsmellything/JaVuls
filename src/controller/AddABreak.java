@@ -16,8 +16,9 @@ public class AddABreak {
 	public static void addBreak(int s)
 	{
 		try {
-		    
+			System.out.println("Taking " + s + "second break just you hold up! :)");
 			TimeUnit.SECONDS.sleep(s);
+			
 		} catch (InterruptedException ie) {
 			Thread.currentThread().interrupt();
 		}
