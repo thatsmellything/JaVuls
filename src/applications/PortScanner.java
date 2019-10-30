@@ -100,6 +100,11 @@ import java.util.ArrayList;
                 int theePort = f.get().getPort();
                 String print = String.valueOf(theePort);
                 openPortsToPrint.add(print);
+                
+               
+                
+                
+                
             }
         }
         
