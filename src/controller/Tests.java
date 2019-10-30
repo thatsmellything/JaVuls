@@ -17,8 +17,7 @@ public class Tests
 		try {
 			
 			//Grabs the operating system that the program is running on
-			String localOS = System.getProperty("os.name");
-			System.out.println(localOS);
+			ShowProperties.getOperatingSystem();
 			//Gets your local machine IP
 			YourIPLookup.getLocalIP();
 			YourIPLookup.viewMyIP();
