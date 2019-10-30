@@ -47,7 +47,7 @@ public class LinuxPing {
 		crunchifyResultFromCommand crunchifyError, crunchifyResult;
  
 		try {
-			// Process proc = rt.exec("curl -v https://www.google.com");
+			Process proc = crunchifyRuntime.exec("curl -v https://www.google.com");
 			Process proc1 = crunchifyRuntime.exec("ping crunchify.com");
 			crunchifyError = rte.getStreamResult(proc1.getErrorStream(), "ERROR");
 			crunchifyResult = rte.getStreamResult(proc1.getInputStream(), "OUTPUT");
