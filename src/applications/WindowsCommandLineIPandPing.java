@@ -13,12 +13,12 @@ public class WindowsCommandLineIPandPing
 	}
 	
 	
-	
+	//Main method for tests
 	public static void main(String[] args)
 	{
 		//windowsPing(null);
 		//windowsNmap();
-		windowsARP();
+		//windowsARP();
 	}
 	
 	public static void windowsPing(String pingy)
@@ -104,12 +104,6 @@ public class WindowsCommandLineIPandPing
 				e.printStackTrace();
 			}
 	}
-	
-	
-	
-	
-	
-	
 	
 	
 	private class printOutput extends Thread {
