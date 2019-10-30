@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -81,29 +82,28 @@ public class JFX extends Application{
 				//create buttons
 				Button systemOSButton = new Button("System OS");
 				Button systemInfoButton = new Button("System Information");
-						
+				Button systemArch = new Button("System Architecture");
+				
 					
 				//Create a scrollable view for output text
 				final ScrollPane textScroll = new ScrollPane();
-				//textScroll.setVmax(100);
-				//textScroll.setHmax(200);
 				textScroll.setPrefSize(200, 200);
 				textScroll.setContent(outputText);
 				
-					//create new button flow thingy so that text doesnt puch the buttons
-					VBox VBoxAlignment = new VBox();
-						//Amount of space inbetween each node in the vbox
-						VBoxAlignment.setSpacing(10);
+					//create new VBox || for system info buttons
+					VBox VBoxSysInfoButtons = new VBox();
+					VBoxSysInfoButtons.setSpacing(10);//Amount of space inbetween each node in the vbox
+					ObservableList list = VBoxSysInfoButtons.getChildren(); //retrieving the observable list of the VBox 
+					list.addAll(systemOSButton, systemInfoButton);//Adding all the nodes to the observable list 
 
 					      
-					      //retrieving the observable list of the VBox 
-					      ObservableList list = VBoxAlignment.getChildren(); 
-					      
-					      //Adding all the nodes to the observable list 
-					      list.addAll(systemOSButton, systemInfoButton, textScroll);
-
+					    //Cretae an HBox to hold multiple vboxes
+							HBox HBoxSurround = new HBox();
+							HBoxSurround.setSpacing(10);
+							ObservableList listH = HBoxSurround.getChildren();
+							listH.addAll(VBoxSysInfoButtons, textScroll);
 					//create a group so you can center it in the screen
-					Group group = new Group(VBoxAlignment);
+					Group group = new Group(HBoxSurround);
 				
 				//Add it to the pane and boom gottem	
 				pane.getChildren().addAll(group);
