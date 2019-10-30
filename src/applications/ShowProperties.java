@@ -32,7 +32,7 @@ public class ShowProperties {
     	//List<Properties> properties = Arrays.asList(System.getProperties());
     	//String propertiesCommaSeperated = String.join(",", properties);
     	
-    	String SystemInformation = System.getProperties().toString() + "\n";
+    	String SystemInformation = System.getProperties().toString();
     	System.out.println(SystemInformation);
     	return SystemInformation;
     	//return properties.toString();

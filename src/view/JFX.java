@@ -74,8 +74,8 @@ public class JFX extends Application{
 				
 				//Create texts
 				Text outputText = new Text();
-				int i = 0;
-				outputText.setText("JaVuls Operation " + i);
+				
+				outputText.setText("JaVuls");
 				String newLine = "\n";
 				
 				//create buttons
@@ -85,8 +85,8 @@ public class JFX extends Application{
 					
 				//Create a scrollable view for output text
 				final ScrollPane textScroll = new ScrollPane();
-				textScroll.setVmax(100);
-				textScroll.setHmax(200);
+				//textScroll.setVmax(100);
+				//textScroll.setHmax(200);
 				textScroll.setPrefSize(200, 200);
 				textScroll.setContent(outputText);
 				
@@ -110,7 +110,7 @@ public class JFX extends Application{
 				
 				//Sets the scene and the title 
 				//(which is the little thing that shows up at the top of applications)
-				Scene scene = new Scene(pane, 600, 400);
+				Scene scene = new Scene(pane, 1024, 720);
 				primaryStage.setTitle("JaVuls");
 				primaryStage.setScene(scene);
 				
@@ -123,7 +123,7 @@ public class JFX extends Application{
 				    @Override public void handle(ActionEvent e) {
 				    	
 				    	outputText.setText(outputText.getText());
-				        outputText.setText(outputText.getText() + newLine + ShowProperties.getOperatingSystem());
+				        outputText.setText(outputText.getText()  + newLine + ShowProperties.getOperatingSystem() + newLine);
 				    }
 				});
 		
@@ -131,7 +131,7 @@ public class JFX extends Application{
 				systemInfoButton.setOnAction(new EventHandler<ActionEvent>() {
 				    @Override public void handle(ActionEvent e) {
 				    	outputText.setText(outputText.getText());
-				        outputText.setText(outputText.getText() + newLine + ShowProperties.getSystemInformation());
+				        outputText.setText(outputText.getText() + newLine + ShowProperties.getSystemInformation() + newLine);
 				    }
 				});
 		
