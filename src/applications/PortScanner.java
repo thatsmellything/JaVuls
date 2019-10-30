@@ -1,7 +1,8 @@
 package applications;
 import java.net.InetSocketAddress;
     import java.net.Socket;
-    import java.util.ArrayList;
+import java.net.UnknownHostException;
+import java.util.ArrayList;
     import java.util.List;
     import java.util.Scanner;
     import java.util.concurrent.Callable;
@@ -35,6 +36,41 @@ import java.net.InetSocketAddress;
         }
         System.out.println("There are " + openPorts + " open ports on host " + ip + " (probed with a timeout of "
         + timeout + "ms)");
+    }
+    
+    public static String localPortScan() throws UnknownHostException, InterruptedException, ExecutionException
+    {
+    	final ExecutorService es = Executors.newCachedThreadPool();
+    	String ip = YourIPLookup.viewMyIP();
+        final int timeout = 200;
+        final List<Future<ScanResult>> futures = new ArrayList<>();
+        for (int port = 1; port <= 65535; port++) {
+            // for (int port = 1; port <= 80; port++) {
+            futures.add(portIsOpen(es, ip, port, timeout));
+        }
+        es.awaitTermination(200L, TimeUnit.MILLISECONDS);
+        int openPorts = 0;
+        ArrayList<String> openPortsToPrint = new ArrayList<String>();
+        for (final Future<ScanResult> f : futures) {
+            if (f.get().isOpen()) {
+                openPorts++;
+                System.out.println(f.get().getPort());
+                int theePort = f.get().getPort();
+                String print = String.valueOf(theePort);
+                openPortsToPrint.add(print);
+            }
+        }
+        System.out.println("There are " + openPorts + " open ports on host " + ip + " (probed with a timeout of "
+        + timeout + "ms)");
+        String openPortsOnLocal = "There are " + openPorts + " open ports on host " + ip + " (probed with a timeout of "
+                + timeout + "ms)";
+        
+        
+     // Access and print out the Objects
+        for ( int j=0; j<openPortsToPrint.size(); j++ )
+          System.out.println("element " + j + ": " + openPortsToPrint.get(j) );
+        
+        return openPortsOnLocal;
     }
 
 

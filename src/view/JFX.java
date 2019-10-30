@@ -1,5 +1,9 @@
 package view;
 
+import java.net.UnknownHostException;
+import java.util.concurrent.ExecutionException;
+
+import applications.PortScanner;
 import applications.ShowProperties;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
@@ -10,6 +14,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -75,14 +80,22 @@ public class JFX extends Application{
 				
 				//Create texts
 				Text outputText = new Text();
-				
 				outputText.setText("JaVuls");
+				
+				//Create labels
+				Label localInformation = new Label("Local Information Gathering");
+				
+				
+				//Strings needed to make life easier
 				String newLine = "\n";
 				
+				
+				
 				//create buttons
-				Button systemOSButton = new Button("System OS");
-				Button systemInfoButton = new Button("System Information");
-				Button systemArch = new Button("System Architecture");
+				Button localOSButton = new Button("System OS");
+				Button localInfoButton = new Button("System Information");
+				Button localArchButton = new Button("System Architecture");
+				Button localPortScannerButton = new Button("Local Port Scanner");
 				
 					
 				//Create a scrollable view for output text
@@ -94,7 +107,7 @@ public class JFX extends Application{
 					VBox VBoxSysInfoButtons = new VBox();
 					VBoxSysInfoButtons.setSpacing(10);//Amount of space inbetween each node in the vbox
 					ObservableList list = VBoxSysInfoButtons.getChildren(); //retrieving the observable list of the VBox 
-					list.addAll(systemOSButton, systemInfoButton);//Adding all the nodes to the observable list 
+					list.addAll(localInformation, localOSButton, localInfoButton, localArchButton, localPortScannerButton);//Adding all the nodes to the observable list 
 
 					      
 					    //Cretae an HBox to hold multiple vboxes
@@ -102,6 +115,8 @@ public class JFX extends Application{
 							HBoxSurround.setSpacing(10);
 							ObservableList listH = HBoxSurround.getChildren();
 							listH.addAll(VBoxSysInfoButtons, textScroll);
+							
+							
 					//create a group so you can center it in the screen
 					Group group = new Group(HBoxSurround);
 				
@@ -119,7 +134,7 @@ public class JFX extends Application{
 		
 				
 				//create listeners for buttons
-				systemOSButton.setOnAction(new EventHandler<ActionEvent>() {
+				localOSButton.setOnAction(new EventHandler<ActionEvent>() {
 				    @Override public void handle(ActionEvent e) {
 				    	
 				    	outputText.setText(outputText.getText());
@@ -128,10 +143,35 @@ public class JFX extends Application{
 				});
 		
 				
-				systemInfoButton.setOnAction(new EventHandler<ActionEvent>() {
+				localInfoButton.setOnAction(new EventHandler<ActionEvent>() {
 				    @Override public void handle(ActionEvent e) {
 				    	outputText.setText(outputText.getText());
 				        outputText.setText(outputText.getText() + newLine + ShowProperties.getSystemInformation() + newLine);
+				    }
+				});
+				
+				localArchButton.setOnAction(new EventHandler<ActionEvent>() {
+				    @Override public void handle(ActionEvent e) {
+				    	outputText.setText(outputText.getText());
+				        outputText.setText(outputText.getText() + newLine + ShowProperties.getOperatingSystemArchitecture() + newLine);
+				    }
+				});
+				
+				localPortScannerButton.setOnAction(new EventHandler<ActionEvent>() {
+				    @Override public void handle(ActionEvent e) {
+				    	outputText.setText(outputText.getText());
+				        try {
+							outputText.setText(outputText.getText() + newLine + PortScanner.localPortScan() + newLine);
+						} catch (UnknownHostException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (InterruptedException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (ExecutionException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 				    }
 				});
 		
