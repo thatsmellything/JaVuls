@@ -10,6 +10,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
@@ -76,22 +77,28 @@ public class JFX extends Application{
 				outputText.setText(null);
 				
 				//create buttons
+				Button systemOSButton = new Button("System OS");
 				Button systemInfoButton = new Button("System Information");
 						
 					
+				//Create a scrollable view for output text
+				final ScrollPane textScroll = new ScrollPane();
+				textScroll.setVmax(100);
+				textScroll.setHmax(200);
+				textScroll.setPrefSize(50, 50);
+				textScroll.setContent(outputText);
+				
 					//create new button flow thingy so that text doesnt puch the buttons
 					VBox VBoxAlignment = new VBox();
 						//Amount of space inbetween each node in the vbox
 						VBoxAlignment.setSpacing(10);
-						//Setting the margin to the nodes 
-					      VBoxAlignment.setMargin(systemInfoButton, new Insets(10, 10, 10, 10));  
-					      VBoxAlignment.setMargin(outputText, new Insets(20, 20, 20, 20));
+
 					      
 					      //retrieving the observable list of the VBox 
 					      ObservableList list = VBoxAlignment.getChildren(); 
 					      
 					      //Adding all the nodes to the observable list 
-					      list.addAll(systemInfoButton, outputText);
+					      list.addAll(systemOSButton, systemInfoButton, textScroll);
 
 					//create a group so you can center it in the screen
 					Group group = new Group(VBoxAlignment);
@@ -110,12 +117,18 @@ public class JFX extends Application{
 		
 				
 				//create listeners for buttons
-				systemInfoButton.setOnAction(new EventHandler<ActionEvent>() {
+				systemOSButton.setOnAction(new EventHandler<ActionEvent>() {
 				    @Override public void handle(ActionEvent e) {
 				        outputText.setText(ShowProperties.getOperatingSystem());
 				    }
 				});
 		
+				
+				systemInfoButton.setOnAction(new EventHandler<ActionEvent>() {
+				    @Override public void handle(ActionEvent e) {
+				        outputText.setText(ShowProperties.getSystemInformation());
+				    }
+				});
 		
 		
 	}

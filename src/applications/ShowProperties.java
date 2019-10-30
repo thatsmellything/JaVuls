@@ -1,5 +1,9 @@
 package applications;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Properties;
+
 //This class shows the properties of the java virtual machine
 
 
@@ -12,6 +16,7 @@ public class ShowProperties {
     public static void main(String[] args) 
     {
         System.getProperties().list(System.out);
+        getSystemInformation();
     }
     
     public static String getOperatingSystem()
@@ -19,5 +24,16 @@ public class ShowProperties {
     	String localOS = System.getProperty("os.name");
 		System.out.println(localOS);
 		return localOS;
+    }
+    
+    public static String getSystemInformation()
+    {
+    	//System.getProperties().list(System.out);
+    	List<Properties> properties = Arrays.asList(System.getProperties());
+    	String propertiesCommaSeperated = String.join(",", properties);
+    	System.out.println(properties);
+    	String SystemInformation = System.getProperties().toString();
+    	//return SystemInformation;
+    	return properties.toString();
     }
 }
