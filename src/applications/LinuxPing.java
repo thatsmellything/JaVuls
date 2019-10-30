@@ -42,12 +42,12 @@ public class LinuxPing {
  
 	public static void main(String[] args) 
 	{
-		LinuxPing("8.8.8.8");
+		LinuxPinger("8.8.8.8");
 		controller.AddABreak.addBreak(5);
 		LinuxCurl("https://google.com");
 		
 	}
-	public static void LinuxPing(String w)
+	public static void LinuxPinger(String w)
 	{
 		// Returns the runtime object associated with the current Java application.
 				Runtime crunchifyRuntime = Runtime.getRuntime();

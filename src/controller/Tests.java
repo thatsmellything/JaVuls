@@ -34,7 +34,8 @@ public class Tests
 			}
 			else
 			{
-				LinuxPing.main(args);
+				LinuxPing.LinuxPinger("google.com");
+				controller.AddABreak.addBreak(5);
 			}
 			
 			
