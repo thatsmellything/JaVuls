@@ -84,6 +84,7 @@ public class JFX extends Application{
 				
 				//Create labels
 				Label localInformation = new Label("Local Information Gathering");
+				Label FInformation = new Label("Foreign IP Scanning Tools");
 				
 				
 				//Strings needed to make life easier
@@ -91,30 +92,44 @@ public class JFX extends Application{
 				
 				
 				
-				//create buttons
+				//create buttons for local machine
 				Button localOSButton = new Button("System OS");
 				Button localInfoButton = new Button("System Information");
 				Button localArchButton = new Button("System Architecture");
 				Button localPortScannerButton = new Button("Local Port Scanner");
 				
+				//Create textfield
+				TextField FIP = new TextField();
+				FIP.setText("Input IP or URL here");
+				
+				
+				//create buttons for foreign machines
+				Button foreignPortScannerButton = new Button("IP Port Scanner");
 					
 				//Create a scrollable view for output text
 				final ScrollPane textScroll = new ScrollPane();
-				textScroll.setPrefSize(200, 200);
+				textScroll.setPrefSize(512, 360);
 				textScroll.setContent(outputText);
+				
+				
+				//create new VBox || for system info buttons
+				VBox VBoxFSysInfoButtons = new VBox();
+				VBoxFSysInfoButtons.setSpacing(10);//Amount of space inbetween each node in the vbox
+				ObservableList list = VBoxFSysInfoButtons.getChildren(); //retrieving the observable list of the VBox 
+				list.addAll(FInformation, FIP, foreignPortScannerButton);
 				
 					//create new VBox || for system info buttons
 					VBox VBoxSysInfoButtons = new VBox();
 					VBoxSysInfoButtons.setSpacing(10);//Amount of space inbetween each node in the vbox
-					ObservableList list = VBoxSysInfoButtons.getChildren(); //retrieving the observable list of the VBox 
-					list.addAll(localInformation, localOSButton, localInfoButton, localArchButton, localPortScannerButton);//Adding all the nodes to the observable list 
+					ObservableList list2 = VBoxSysInfoButtons.getChildren(); //retrieving the observable list of the VBox 
+					list2.addAll(localInformation, localOSButton, localInfoButton, localArchButton, localPortScannerButton);//Adding all the nodes to the observable list 
 
 					      
 					    //Cretae an HBox to hold multiple vboxes
 							HBox HBoxSurround = new HBox();
 							HBoxSurround.setSpacing(10);
 							ObservableList listH = HBoxSurround.getChildren();
-							listH.addAll(VBoxSysInfoButtons, textScroll);
+							listH.addAll(VBoxFSysInfoButtons, VBoxSysInfoButtons, textScroll);
 							
 							
 					//create a group so you can center it in the screen
@@ -162,6 +177,24 @@ public class JFX extends Application{
 				    	outputText.setText(outputText.getText());
 				        try {
 							outputText.setText(outputText.getText() + newLine + PortScanner.localPortScan() + newLine);
+						} catch (UnknownHostException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (InterruptedException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (ExecutionException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+				    }
+				});
+				
+				foreignPortScannerButton.setOnAction(new EventHandler<ActionEvent>() {
+				    @Override public void handle(ActionEvent e) {
+				    	outputText.setText(outputText.getText());
+				        try {
+							outputText.setText(outputText.getText() + newLine + PortScanner.foreignPortScan(FIP.getText()) + newLine);
 						} catch (UnknownHostException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();

@@ -51,6 +51,8 @@ import java.util.ArrayList;
         es.awaitTermination(200L, TimeUnit.MILLISECONDS);
         int openPorts = 0;
         ArrayList<String> openPortsToPrint = new ArrayList<String>();
+        
+        
         for (final Future<ScanResult> f : futures) {
             if (f.get().isOpen()) {
                 openPorts++;
@@ -60,17 +62,60 @@ import java.util.ArrayList;
                 openPortsToPrint.add(print);
             }
         }
+        
+        String r = openPortsToPrint.toString();
         System.out.println("There are " + openPorts + " open ports on host " + ip + " (probed with a timeout of "
         + timeout + "ms)");
+        
+        
         String openPortsOnLocal = "There are " + openPorts + " open ports on host " + ip + " (probed with a timeout of "
-                + timeout + "ms)";
+                + timeout + "ms) OPEN PORTS: " + r;
         
-        
-     // Access and print out the Objects
-        for ( int j=0; j<openPortsToPrint.size(); j++ )
-          System.out.println("element " + j + ": " + openPortsToPrint.get(j) );
-        
+       
+     
         return openPortsOnLocal;
+        
+        
+    }
+    
+    public static String foreignPortScan(String ipOfSearch) throws UnknownHostException, InterruptedException, ExecutionException
+    {
+    	final ExecutorService es = Executors.newCachedThreadPool();
+    	String ip = ipOfSearch;
+        final int timeout = 200;
+        final List<Future<ScanResult>> futures = new ArrayList<>();
+        for (int port = 1; port <= 65535; port++) {
+            // for (int port = 1; port <= 80; port++) {
+            futures.add(portIsOpen(es, ip, port, timeout));
+        }
+        es.awaitTermination(200L, TimeUnit.MILLISECONDS);
+        int openPorts = 0;
+        ArrayList<String> openPortsToPrint = new ArrayList<String>();
+        
+        
+        for (final Future<ScanResult> f : futures) {
+            if (f.get().isOpen()) {
+                openPorts++;
+                System.out.println(f.get().getPort());
+                int theePort = f.get().getPort();
+                String print = String.valueOf(theePort);
+                openPortsToPrint.add(print);
+            }
+        }
+        
+        String r = openPortsToPrint.toString();
+        System.out.println("There are " + openPorts + " open ports on host " + ip + " (probed with a timeout of "
+        + timeout + "ms)");
+        
+        
+        String openPortsOnLocal = "There are " + openPorts + " open ports on host " + ip + " (probed with a timeout of "
+                + timeout + "ms) OPEN PORTS: " + r;
+        
+       
+     
+        return openPortsOnLocal;
+        
+        
     }
 
 
