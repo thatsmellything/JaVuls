@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.UnknownHostException;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 import applications.*;
 
@@ -15,14 +16,32 @@ public class Tests
 	{
 		try {
 			
-			
-			
-			
+			//Grabs the operating system that the program is running on
+			String localOS = System.getProperty("os.name");
+			System.out.println(localOS);
+			//Gets your local machine IP
 			YourIPLookup.getLocalIP();
 			YourIPLookup.viewMyIP();
-			WindowsCommandLineIPandPing.windowsPing("8.8.8.8");
+			
+			//if machine is on windows it will run the windows version of command line tools
+			if (localOS.equals("Windows 10"))
+			{
+				WindowsCommandLineIPandPing.windowsPing("8.8.8.8");
+			
+				try {
+			    
+					TimeUnit.SECONDS.sleep(5);
+				} catch (InterruptedException ie) {
+					Thread.currentThread().interrupt();
+				}
+			}
+			
+			
+			//Runs the port scanner
 			PortScanner.main(YourIPLookup.getLocalIP().toString());
 			
+			
+			// A bunch of catch clauses for all the possible errors
 			} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
