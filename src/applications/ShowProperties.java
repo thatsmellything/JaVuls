@@ -28,12 +28,13 @@ public class ShowProperties {
     
     public static String getSystemInformation()
     {
-    	//System.getProperties().list(System.out);
-    	List<Properties> properties = Arrays.asList(System.getProperties());
-    	String propertiesCommaSeperated = String.join(",", properties);
-    	System.out.println(properties);
-    	String SystemInformation = System.getProperties().toString();
-    	//return SystemInformation;
-    	return properties.toString();
+    	System.getProperties().list(System.out);
+    	//List<Properties> properties = Arrays.asList(System.getProperties());
+    	//String propertiesCommaSeperated = String.join(",", properties);
+    	
+    	String SystemInformation = System.getProperties().toString() + "\n";
+    	System.out.println(SystemInformation);
+    	return SystemInformation;
+    	//return properties.toString();
     }
 }

@@ -74,7 +74,9 @@ public class JFX extends Application{
 				
 				//Create texts
 				Text outputText = new Text();
-				outputText.setText(null);
+				int i = 0;
+				outputText.setText("JaVuls Operation " + i);
+				String newLine = "\n";
 				
 				//create buttons
 				Button systemOSButton = new Button("System OS");
@@ -85,7 +87,7 @@ public class JFX extends Application{
 				final ScrollPane textScroll = new ScrollPane();
 				textScroll.setVmax(100);
 				textScroll.setHmax(200);
-				textScroll.setPrefSize(50, 50);
+				textScroll.setPrefSize(200, 200);
 				textScroll.setContent(outputText);
 				
 					//create new button flow thingy so that text doesnt puch the buttons
@@ -119,14 +121,17 @@ public class JFX extends Application{
 				//create listeners for buttons
 				systemOSButton.setOnAction(new EventHandler<ActionEvent>() {
 				    @Override public void handle(ActionEvent e) {
-				        outputText.setText(ShowProperties.getOperatingSystem());
+				    	
+				    	outputText.setText(outputText.getText());
+				        outputText.setText(outputText.getText() + newLine + ShowProperties.getOperatingSystem());
 				    }
 				});
 		
 				
 				systemInfoButton.setOnAction(new EventHandler<ActionEvent>() {
 				    @Override public void handle(ActionEvent e) {
-				        outputText.setText(ShowProperties.getSystemInformation());
+				    	outputText.setText(outputText.getText());
+				        outputText.setText(outputText.getText() + newLine + ShowProperties.getSystemInformation());
 				    }
 				});
 		
