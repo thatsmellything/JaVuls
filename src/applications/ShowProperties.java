@@ -15,8 +15,9 @@ public class ShowProperties {
 	
     public static void main(String[] args) 
     {
-        System.getProperties().list(System.out);
-        getSystemInformation();
+       // System.getProperties().list(System.out);
+      //  getSystemInformation();
+        getOperatingSystemArchitecture();
     }
     
     public static String getOperatingSystem()
@@ -24,6 +25,13 @@ public class ShowProperties {
     	String localOS = System.getProperty("os.name");
 		System.out.println(localOS);
 		return localOS;
+    }
+    
+    public static String getOperatingSystemArchitecture()
+    {
+    	String localArch = System.getProperty("os.arch");
+    	System.out.println(localArch);
+    	return localArch;
     }
     
     public static String getSystemInformation()
