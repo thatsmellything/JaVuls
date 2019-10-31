@@ -85,7 +85,7 @@ public class WindowsCommandLineIPandPing
 			}
 	}
 	
-	public static String windowsARP(String ip)
+	public static String windowsARP()
 	{
 		Runtime rt = Runtime.getRuntime();
 		WindowsCommandLineIPandPing rte = new WindowsCommandLineIPandPing();
@@ -94,7 +94,7 @@ public class WindowsCommandLineIPandPing
 			//Process p = Runtime.getRuntime().exec("ping google.com");
 			//Logic that happens with the command line thing in windows
 				
-			Process proc = rt.exec("arp -a " + ip);
+			Process proc = rt.exec("arp -a ");
 			errorReported = rte.getStreamWrapper(proc.getErrorStream(), "ERROR");
 			outputMessage = rte.getStreamWrapper(proc.getInputStream(), "OUTPUT");
 			errorReported.start();
