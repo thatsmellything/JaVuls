@@ -98,14 +98,17 @@ public class JFX extends Application{
 				Button localArchButton = new Button("System Architecture");
 				Button localPortScannerButton = new Button("Local Port Scanner");
 				
-				//Create textfield
+				//Create textfield for foreign IP
 				TextField FIP = new TextField();
 				FIP.setText("Input IP or URL here");
 				
 				
 				//create buttons for foreign machines
-				Button foreignPortScannerButton = new Button("IP Port Scanner");
-					
+				Button FPortScannerButton = new Button("IP Port Scanner");
+				Button FArpButton = new Button("Arch foreign IP Address");
+				
+				
+				
 				//Create a scrollable view for output text
 				final ScrollPane textScroll = new ScrollPane();
 				textScroll.setPrefSize(512, 360);
@@ -116,7 +119,7 @@ public class JFX extends Application{
 				VBox VBoxFSysInfoButtons = new VBox();
 				VBoxFSysInfoButtons.setSpacing(10);//Amount of space inbetween each node in the vbox
 				ObservableList list = VBoxFSysInfoButtons.getChildren(); //retrieving the observable list of the VBox 
-				list.addAll(FInformation, FIP, foreignPortScannerButton);
+				list.addAll(FInformation, FIP, FPortScannerButton, FArpButton);
 				
 					//create new VBox || for system info buttons
 					VBox VBoxSysInfoButtons = new VBox();
@@ -190,7 +193,7 @@ public class JFX extends Application{
 				    }
 				});
 				
-				foreignPortScannerButton.setOnAction(new EventHandler<ActionEvent>() {
+				FPortScannerButton.setOnAction(new EventHandler<ActionEvent>() {
 				    @Override public void handle(ActionEvent e) {
 				    	outputText.setText(outputText.getText());
 				        try {
