@@ -108,7 +108,7 @@ public class JFX extends Application{
 				
 				//create buttons for foreign machines
 				Button FPortScannerButton = new Button("IP Port Scanner");
-				Button FARPButton = new Button("ARP foreign IP Address");
+				
 				
 				
 				
@@ -122,7 +122,7 @@ public class JFX extends Application{
 				VBox VBoxFSysInfoButtons = new VBox();
 				VBoxFSysInfoButtons.setSpacing(10);//Amount of space inbetween each node in the vbox
 				ObservableList list = VBoxFSysInfoButtons.getChildren(); //retrieving the observable list of the VBox 
-				list.addAll(FInformation, FIP, FPortScannerButton, FARPButton);
+				list.addAll(FInformation, FIP, FPortScannerButton);
 				
 					//create new VBox || for system info buttons
 					VBox VBoxSysInfoButtons = new VBox();
@@ -182,7 +182,7 @@ public class JFX extends Application{
 				    @Override public void handle(ActionEvent e) {
 				    	outputText.setText(outputText.getText());
 				        try {
-							outputText.setText(outputText.getText() + newLine + WindowsCommandLineIPandPing.windowsARP(YourIPLookup.viewMyIP()) + newLine);
+							outputText.setText(outputText.getText() + newLine + WindowsCommandLineIPandPing.windowsARP() + newLine);
 						} catch (UnknownHostException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
@@ -226,12 +226,7 @@ public class JFX extends Application{
 				    }
 				});
 				
-				FARPButton.setOnAction(new EventHandler<ActionEvent>() {
-				    @Override public void handle(ActionEvent e) {
-				    	outputText.setText(outputText.getText());
-				        outputText.setText(outputText.getText() + newLine + WindowsCommandLineIPandPing.windowsARP(FIP.getText()) + newLine);
-				    }
-				});
+				
 		
 		
 	}
