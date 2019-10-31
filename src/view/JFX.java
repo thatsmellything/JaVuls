@@ -181,7 +181,7 @@ public class JFX extends Application{
 				localARPButton.setOnAction(new EventHandler<ActionEvent>() {
 				    @Override public void handle(ActionEvent e) {
 				    	outputText.setText(outputText.getText());
-				        outputText.setText(outputText.getText() + newLine + WindowsCommandLineIPandPing.windowsARP() + newLine);
+				     //   outputText.setText(outputText.getText() + newLine + WindowsCommandLineIPandPing.windowsARP() + newLine);
 				    }
 				});
 				

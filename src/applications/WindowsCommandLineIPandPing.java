@@ -85,7 +85,7 @@ public class WindowsCommandLineIPandPing
 			}
 	}
 	
-	public static String windowsARP()
+	public static void windowsARP()
 	{
 		Runtime rt = Runtime.getRuntime();
 		WindowsCommandLineIPandPing rte = new WindowsCommandLineIPandPing();
@@ -103,8 +103,9 @@ public class WindowsCommandLineIPandPing
 			{
 				e.printStackTrace();
 			}
-		String output = printOutput.returnOutput();
-		return output;
+		
+		
+		
 	}
 	
 	
@@ -128,11 +129,10 @@ public class WindowsCommandLineIPandPing
 				ioe.printStackTrace();
 			}
 			
+			
+			
 		}
 		
-		public static String returnOutput()
-		{
-			return s;
-		}
+		
 	}
 }
