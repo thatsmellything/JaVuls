@@ -85,7 +85,7 @@ public class WindowsCommandLineIPandPing
 			}
 	}
 	
-	public static void windowsARP()
+	public static String windowsARP(String ip)
 	{
 		Runtime rt = Runtime.getRuntime();
 		WindowsCommandLineIPandPing rte = new WindowsCommandLineIPandPing();
@@ -94,7 +94,7 @@ public class WindowsCommandLineIPandPing
 			//Process p = Runtime.getRuntime().exec("ping google.com");
 			//Logic that happens with the command line thing in windows
 				
-			Process proc = rt.exec("arp -a ");
+			Process proc = rt.exec("arp -a " + ip);
 			errorReported = rte.getStreamWrapper(proc.getErrorStream(), "ERROR");
 			outputMessage = rte.getStreamWrapper(proc.getInputStream(), "OUTPUT");
 			errorReported.start();
@@ -103,18 +103,21 @@ public class WindowsCommandLineIPandPing
 			{
 				e.printStackTrace();
 			}
+		String output = printOutput.returnOutput();
+		return output;
 	}
 	
 	
-	private class printOutput extends Thread {
+	public static class printOutput extends Thread {
 		InputStream is = null;
  
 		printOutput(InputStream is, String type) {
 			this.is = is;
 		}
  
+		static String s = null;
 		public void run() {
-			String s = null;
+			
 			try {
 				BufferedReader br = new BufferedReader(
 						new InputStreamReader(is));
@@ -124,6 +127,12 @@ public class WindowsCommandLineIPandPing
 			} catch (IOException ioe) {
 				ioe.printStackTrace();
 			}
+			
+		}
+		
+		public static String returnOutput()
+		{
+			return s;
 		}
 	}
 }
