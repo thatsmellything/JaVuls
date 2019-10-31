@@ -9,7 +9,8 @@ public class YourIPLookup {
 	    public static String getLocalIP() throws UnknownHostException
 	    {
 	        InetAddress inetAddress = InetAddress.getLocalHost();
-	        
+	    	System.out.println("IP Address:- " + inetAddress.getHostAddress());
+	        System.out.println("Host Name:- " + inetAddress.getHostName());
 	        return inetAddress.toString();
 	    }
 	    
@@ -17,8 +18,7 @@ public class YourIPLookup {
 	    {
 	    	InetAddress inetAddress = InetAddress.getLocalHost();
 	    	String ipAddress = inetAddress.getHostAddress();
-	    	System.out.println("IP Address:- " + inetAddress.getHostAddress());
-	        System.out.println("Host Name:- " + inetAddress.getHostName());
+
 	        //return inetAddress.toString();
 	        return ipAddress;
 	    }

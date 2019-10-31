@@ -5,6 +5,8 @@ import java.util.concurrent.ExecutionException;
 
 import applications.PortScanner;
 import applications.ShowProperties;
+import applications.WindowsCommandLineIPandPing;
+import applications.YourIPLookup;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -97,6 +99,7 @@ public class JFX extends Application{
 				Button localInfoButton = new Button("System Information");
 				Button localArchButton = new Button("System Architecture");
 				Button localPortScannerButton = new Button("Local Port Scanner");
+				Button localARPButton = new Button("Local ARP Scan");
 				
 				//Create textfield for foreign IP
 				TextField FIP = new TextField();
@@ -105,7 +108,7 @@ public class JFX extends Application{
 				
 				//create buttons for foreign machines
 				Button FPortScannerButton = new Button("IP Port Scanner");
-				Button FArpButton = new Button("Arch foreign IP Address");
+				Button FARPButton = new Button("ARP foreign IP Address");
 				
 				
 				
@@ -119,13 +122,13 @@ public class JFX extends Application{
 				VBox VBoxFSysInfoButtons = new VBox();
 				VBoxFSysInfoButtons.setSpacing(10);//Amount of space inbetween each node in the vbox
 				ObservableList list = VBoxFSysInfoButtons.getChildren(); //retrieving the observable list of the VBox 
-				list.addAll(FInformation, FIP, FPortScannerButton, FArpButton);
+				list.addAll(FInformation, FIP, FPortScannerButton, FARPButton);
 				
 					//create new VBox || for system info buttons
 					VBox VBoxSysInfoButtons = new VBox();
 					VBoxSysInfoButtons.setSpacing(10);//Amount of space inbetween each node in the vbox
 					ObservableList list2 = VBoxSysInfoButtons.getChildren(); //retrieving the observable list of the VBox 
-					list2.addAll(localInformation, localOSButton, localInfoButton, localArchButton, localPortScannerButton);//Adding all the nodes to the observable list 
+					list2.addAll(localInformation, localOSButton, localInfoButton, localArchButton, localPortScannerButton, localARPButton);//Adding all the nodes to the observable list 
 
 					      
 					    //Cretae an HBox to hold multiple vboxes
@@ -175,6 +178,18 @@ public class JFX extends Application{
 				    }
 				});
 				
+				localARPButton.setOnAction(new EventHandler<ActionEvent>() {
+				    @Override public void handle(ActionEvent e) {
+				    	outputText.setText(outputText.getText());
+				        try {
+							outputText.setText(outputText.getText() + newLine + WindowsCommandLineIPandPing.windowsARP(YourIPLookup.viewMyIP()) + newLine);
+						} catch (UnknownHostException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+				    }
+				});
+				
 				localPortScannerButton.setOnAction(new EventHandler<ActionEvent>() {
 				    @Override public void handle(ActionEvent e) {
 				    	outputText.setText(outputText.getText());
@@ -208,6 +223,13 @@ public class JFX extends Application{
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
+				    }
+				});
+				
+				FARPButton.setOnAction(new EventHandler<ActionEvent>() {
+				    @Override public void handle(ActionEvent e) {
+				    	outputText.setText(outputText.getText());
+				        outputText.setText(outputText.getText() + newLine + WindowsCommandLineIPandPing.windowsARP(FIP.getText()) + newLine);
 				    }
 				});
 		
