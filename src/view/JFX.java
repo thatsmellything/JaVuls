@@ -80,9 +80,10 @@ public class JFX extends Application{
 					//Add the texts to the screen
 				*/	
 				
-				//Create texts
+				//Create texts and clear button
 				Text outputText = new Text();
 				outputText.setText("JaVuls");
+				Button clearButton = new Button("Clear Text");
 				
 				//Create labels
 				Label localInformation = new Label("Local Information Gathering");
@@ -124,6 +125,13 @@ public class JFX extends Application{
 				ObservableList list = VBoxFSysInfoButtons.getChildren(); //retrieving the observable list of the VBox 
 				list.addAll(FInformation, FIP, FPortScannerButton);
 				
+				//create VBox for text space and the clear button
+				VBox VBoxTextAndClear = new VBox();
+				VBoxFSysInfoButtons.setSpacing(10);//Amount of space inbetween each node in the vbox
+				ObservableList list3 = VBoxTextAndClear.getChildren(); //retrieving the observable list of the VBox 
+				list.addAll(textScroll, clearButton);
+				
+				
 					//create new VBox || for system info buttons
 					VBox VBoxSysInfoButtons = new VBox();
 					VBoxSysInfoButtons.setSpacing(10);//Amount of space inbetween each node in the vbox
@@ -135,7 +143,7 @@ public class JFX extends Application{
 							HBox HBoxSurround = new HBox();
 							HBoxSurround.setSpacing(10);
 							ObservableList listH = HBoxSurround.getChildren();
-							listH.addAll(VBoxFSysInfoButtons, VBoxSysInfoButtons, textScroll);
+							listH.addAll(VBoxFSysInfoButtons, VBoxSysInfoButtons, VBoxTextAndClear);
 							
 							
 					//create a group so you can center it in the screen
@@ -155,6 +163,14 @@ public class JFX extends Application{
 		
 				
 				//create listeners for buttons
+				clearButton.setOnAction(new EventHandler<ActionEvent>() {
+				    @Override public void handle(ActionEvent e) {
+				    	
+				    	outputText.setText(outputText.getText());
+				        outputText.setText("Cleared Text");
+				    }
+				});
+				
 				localOSButton.setOnAction(new EventHandler<ActionEvent>() {
 				    @Override public void handle(ActionEvent e) {
 				    	
