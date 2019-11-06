@@ -13,12 +13,12 @@ public class ShowProperties {
 	String localOS = null;
 	
 	
-    public static void main(String[] args) 
-    {
-       // System.getProperties().list(System.out);
-      //  getSystemInformation();
+    /*public static void main(String[] args) 
+    //{
+        System.getProperties().list(System.out);
+        getSystemInformation();
         getOperatingSystemArchitecture();
-    }
+    }*/
     
     public static String getOperatingSystem()
     {
