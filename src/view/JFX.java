@@ -1,5 +1,8 @@
 package view;
 
+import java.awt.GraphicsEnvironment;
+import java.io.Console;
+import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.concurrent.ExecutionException;
 
@@ -27,6 +30,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
+import testFiles.OpenCommandPrompt;
 
 public class JFX extends Application{
 	
@@ -101,6 +105,7 @@ public class JFX extends Application{
 				Button localArchButton = new Button("System Architecture");
 				Button localPortScannerButton = new Button("Local Port Scanner");
 				Button localARPButton = new Button("Local ARP Scan");
+				Button localConsoleButton = new Button("Open Console");
 				
 				//Create textfield for foreign IP
 				TextField FIP = new TextField();
@@ -136,7 +141,7 @@ public class JFX extends Application{
 					VBox VBoxSysInfoButtons = new VBox();
 					VBoxSysInfoButtons.setSpacing(10);//Amount of space inbetween each node in the vbox
 					ObservableList list2 = VBoxSysInfoButtons.getChildren(); //retrieving the observable list of the VBox 
-					list2.addAll(localInformation, localOSButton, localInfoButton, localArchButton, localPortScannerButton, localARPButton);//Adding all the nodes to the observable list 
+					list2.addAll(localInformation, localOSButton, localInfoButton, localArchButton, localPortScannerButton, localARPButton, localConsoleButton);//Adding all the nodes to the observable list 
 
 					      
 					    //Cretae an HBox to hold multiple vboxes
@@ -216,6 +221,27 @@ public class JFX extends Application{
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
+				    }
+				});
+				
+				
+				
+				localConsoleButton.setOnAction(new EventHandler<ActionEvent>() {
+				    @Override public void handle(ActionEvent e) {
+				    	
+				    	 Console console = System.console();
+				         if(console == null && !GraphicsEnvironment.isHeadless()){
+				             String filename = OpenCommandPrompt.class.getProtectionDomain().getCodeSource().getLocation().toString().substring(6);
+				             try {
+								Runtime.getRuntime().exec(new String[]{"cmd","/c","start","cmd","/k","java -jar \"" + filename + "\""});
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+				         }else{
+				             WindowsCommandLineIPandPing.main(new String[0]);
+				             System.out.println("Program has ended, please type 'exit' to close the console");
+				         }
 				    }
 				});
 				
