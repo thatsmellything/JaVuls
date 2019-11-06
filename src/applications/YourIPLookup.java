@@ -38,8 +38,10 @@ public class YourIPLookup {
 	    }
 	    
 
+	    /*
 	    public static void main (String[] args) throws UnknownHostException {
 			getLocalIP();
 		}
+		*/
 	    
 }

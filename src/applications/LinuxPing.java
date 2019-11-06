@@ -40,13 +40,15 @@ public class LinuxPing {
 		return new crunchifyResultFromCommand(inputStream, type);
 	}
  
-	public static void main(String[] args) 
+	/*
+	 * public static void main(String[] args) 
 	{
 		LinuxPinger("8.8.8.8");
 		controller.AddABreak.addBreak(5);
 		LinuxCurl("https://google.com");
 		
 	}
+	*/
 	public static void LinuxPinger(String w)
 	{
 		// Returns the runtime object associated with the current Java application.
