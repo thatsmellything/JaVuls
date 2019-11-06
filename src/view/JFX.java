@@ -106,6 +106,7 @@ public class JFX extends Application{
 				Button localPortScannerButton = new Button("Local Port Scanner");
 				Button localARPButton = new Button("Local ARP Scan");
 				Button localConsoleButton = new Button("Open Console");
+				Button localFileExplorerButton = new Button("File Expolorer");
 				
 				//Create textfield for foreign IP
 				TextField FIP = new TextField();
@@ -141,7 +142,7 @@ public class JFX extends Application{
 					VBox VBoxSysInfoButtons = new VBox();
 					VBoxSysInfoButtons.setSpacing(10);//Amount of space inbetween each node in the vbox
 					ObservableList list2 = VBoxSysInfoButtons.getChildren(); //retrieving the observable list of the VBox 
-					list2.addAll(localInformation, localOSButton, localInfoButton, localArchButton, localPortScannerButton, localARPButton, localConsoleButton);//Adding all the nodes to the observable list 
+					list2.addAll(localInformation, localOSButton, localInfoButton, localArchButton, localPortScannerButton, localARPButton, localConsoleButton, localFileExplorerButton);//Adding all the nodes to the observable list 
 
 					      
 					    //Cretae an HBox to hold multiple vboxes
@@ -233,6 +234,42 @@ public class JFX extends Application{
 				         if(console == null && !GraphicsEnvironment.isHeadless()){
 				             String filename = OpenCommandPrompt.class.getProtectionDomain().getCodeSource().getLocation().toString().substring(6);
 				             try {
+								Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"cd \"");
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+				         }else{
+				             WindowsCommandLineIPandPing.main(new String[0]);
+				             System.out.println("Program has ended, please type 'exit' to close the console");
+				         }
+				         */
+				         
+				    	
+				    	try
+				        {  
+				         // We are running "dir" and "ping" command on cmd
+				    		String back = "cd \"";
+				    		String directory = "cd C:/Windows/System32";
+				    		String command = "arp -a";
+				         Runtime.getRuntime().exec(new String[] {"cmd.exe", "/k", "start" }); 
+				        } 
+				        catch (Exception e1) 
+				        { 
+				            System.out.println("Something broke bud"); 
+				            e1.printStackTrace(); 
+				        } 
+				        
+				    }
+				});
+				
+				localFileExplorerButton.setOnAction(new EventHandler<ActionEvent>() {
+				    @Override public void handle(ActionEvent e) {
+				    	/*
+				    	 Console console = System.console();
+				         if(console == null && !GraphicsEnvironment.isHeadless()){
+				             String filename = OpenCommandPrompt.class.getProtectionDomain().getCodeSource().getLocation().toString().substring(6);
+				             try {
 								Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"dir && ping localhost\"");
 							} catch (IOException e1) {
 								// TODO Auto-generated catch block
@@ -247,13 +284,14 @@ public class JFX extends Application{
 				    	
 				    	try
 				        {  
-				         // We are running "dir" and "ping" command on cmd 
+				         // We are running "dir" and "ping" command on cmd
+				    		String back = "..\"";
 				    		String command = "arp -a";
-				         Runtime.getRuntime().exec(new String[] {"cmd.exe", "/k", "start", command}); 
+				         Runtime.getRuntime().exec(new String[] {"cmd.exe", "/k", "start", back}); 
 				        } 
 				        catch (Exception e1) 
 				        { 
-				            System.out.println("HEY Buddy ! U r Doing Something Wrong "); 
+				            System.out.println("Something broke bud"); 
 				            e1.printStackTrace(); 
 				        } 
 				    }
