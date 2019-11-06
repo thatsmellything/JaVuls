@@ -228,12 +228,12 @@ public class JFX extends Application{
 				
 				localConsoleButton.setOnAction(new EventHandler<ActionEvent>() {
 				    @Override public void handle(ActionEvent e) {
-				    	
+				    	/*
 				    	 Console console = System.console();
 				         if(console == null && !GraphicsEnvironment.isHeadless()){
 				             String filename = OpenCommandPrompt.class.getProtectionDomain().getCodeSource().getLocation().toString().substring(6);
 				             try {
-								Runtime.getRuntime().exec(new String[]{"cmd","/c","start","cmd","/k","java -jar \"" + filename + "\""});
+								Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"dir && ping localhost\"");
 							} catch (IOException e1) {
 								// TODO Auto-generated catch block
 								e1.printStackTrace();
@@ -242,6 +242,20 @@ public class JFX extends Application{
 				             WindowsCommandLineIPandPing.main(new String[0]);
 				             System.out.println("Program has ended, please type 'exit' to close the console");
 				         }
+				         
+				         */
+				    	
+				    	try
+				        {  
+				         // We are running "dir" and "ping" command on cmd 
+				    		String command = "arp -a";
+				         Runtime.getRuntime().exec(new String[] {"cmd.exe", "/k", "start", command}); 
+				        } 
+				        catch (Exception e1) 
+				        { 
+				            System.out.println("HEY Buddy ! U r Doing Something Wrong "); 
+				            e1.printStackTrace(); 
+				        } 
 				    }
 				});
 				
