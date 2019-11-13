@@ -35,6 +35,7 @@ import testFiles.OpenCommandPrompt;
 public class JFX extends Application{
 	
 	
+	
 	@Override
 	public void start(Stage primaryStage)
 	{
@@ -111,7 +112,7 @@ public class JFX extends Application{
 				//Create textfield for foreign IP
 				TextField FIP = new TextField();
 				FIP.setText("Input IP or URL here");
-				
+				String FIPtext = FIP.getText();
 				
 				//create buttons for foreign machines
 				Button FPortScannerButton = new Button("IP Port Scanner");
