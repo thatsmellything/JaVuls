@@ -145,7 +145,7 @@ public class JFX extends Application{
 					list2.addAll(localInformation, localOSButton, localInfoButton, localArchButton, localPortScannerButton, localARPButton, localConsoleButton, localFileExplorerButton);//Adding all the nodes to the observable list 
 
 					      
-					    //Cretae an HBox to hold multiple vboxes
+					    //Create an HBox to hold multiple vboxes
 							HBox HBoxSurround = new HBox();
 							HBoxSurround.setSpacing(10);
 							ObservableList listH = HBoxSurround.getChildren();

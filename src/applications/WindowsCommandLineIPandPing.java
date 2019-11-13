@@ -103,7 +103,7 @@ public class WindowsCommandLineIPandPing
 			{
 				e.printStackTrace();
 			}
-		return outputMessage.toString();
+		return printOutput.printToScreen(null);
 
 	}
 	
@@ -123,6 +123,7 @@ public class WindowsCommandLineIPandPing
 						new InputStreamReader(is));
 				while ((s = br.readLine()) != null) {
 					System.out.println(s);
+					printToScreen(s);
 				}
 			} catch (IOException ioe) {
 				ioe.printStackTrace();
@@ -130,6 +131,12 @@ public class WindowsCommandLineIPandPing
 			
 			
 			
+			
+		}
+		
+		public static String printToScreen(String s)
+		{
+			return s;
 		}
 		
 		
