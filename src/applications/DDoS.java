@@ -13,12 +13,7 @@ public class DDoS {
             thread.start();
         } 
     }    
-	public void numOfThreads(int num)
-	{
-		for (int i = 0; i < num; i++) {
-            	DdosThread thread = new DdosThread();
-            	thread.start();
-	}    
+   
      
  
     public static class DdosThread extends Thread {
