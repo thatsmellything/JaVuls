@@ -112,6 +112,9 @@ public class JFX extends Application{
 				TextField FIP = new TextField();
 				FIP.setText("Input IP or URL here");
 				
+				//Create textfield for number of threads allowed
+				TextField threadsAllowed = new TextField();
+				threadsAllowed.setText("4");
 				
 				//create buttons for foreign machines
 				Button FPortScannerButton = new Button("IP Port Scanner");
@@ -129,7 +132,7 @@ public class JFX extends Application{
 				VBox VBoxFSysInfoButtons = new VBox();
 				VBoxFSysInfoButtons.setSpacing(10);//Amount of space inbetween each node in the vbox
 				ObservableList list = VBoxFSysInfoButtons.getChildren(); //retrieving the observable list of the VBox 
-				list.addAll(FInformation, FIP, FPortScannerButton);
+				list.addAll(FInformation, FIP, FPortScannerButton, threadsAllowed);
 				
 				//create VBox for text space and the clear button
 				VBox VBoxTextAndClear = new VBox();
