@@ -112,7 +112,14 @@ public class JFX extends Application{
 				//Create textfield for foreign IP
 				TextField FIP = new TextField();
 				FIP.setText("Input IP or URL here");
+
 				String FIPtext = FIP.getText();
+
+				
+				//Create textfield for number of threads allowed
+				TextField threadsAllowed = new TextField();
+				threadsAllowed.setText("4");
+
 				
 				//create buttons for foreign machines
 				Button FPortScannerButton = new Button("IP Port Scanner");
@@ -130,7 +137,7 @@ public class JFX extends Application{
 				VBox VBoxFSysInfoButtons = new VBox();
 				VBoxFSysInfoButtons.setSpacing(10);//Amount of space inbetween each node in the vbox
 				ObservableList list = VBoxFSysInfoButtons.getChildren(); //retrieving the observable list of the VBox 
-				list.addAll(FInformation, FIP, FPortScannerButton);
+				list.addAll(FInformation, FIP, FPortScannerButton, threadsAllowed);
 				
 				//create VBox for text space and the clear button
 				VBox VBoxTextAndClear = new VBox();
@@ -301,6 +308,9 @@ public class JFX extends Application{
 				FPortScannerButton.setOnAction(new EventHandler<ActionEvent>() {
 				    @Override public void handle(ActionEvent e) {
 				    	outputText.setText(outputText.getText());
+					    
+					    if(threadsAllowed.getText().equals(null))
+					    {
 				        try {
 							outputText.setText(outputText.getText() + newLine + PortScanner.foreignPortScan(FIP.getText()) + newLine);
 						} catch (UnknownHostException e1) {
@@ -313,6 +323,7 @@ public class JFX extends Application{
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
+					    }
 				    }
 				});
 				
