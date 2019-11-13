@@ -303,6 +303,9 @@ public class JFX extends Application{
 				FPortScannerButton.setOnAction(new EventHandler<ActionEvent>() {
 				    @Override public void handle(ActionEvent e) {
 				    	outputText.setText(outputText.getText());
+					    
+					    if(threadsAllowed.getText().equals(null))
+					    {
 				        try {
 							outputText.setText(outputText.getText() + newLine + PortScanner.foreignPortScan(FIP.getText()) + newLine);
 						} catch (UnknownHostException e1) {
@@ -315,6 +318,7 @@ public class JFX extends Application{
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
+					    }
 				    }
 				});
 				
