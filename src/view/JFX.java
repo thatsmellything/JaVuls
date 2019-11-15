@@ -8,6 +8,7 @@ import java.util.concurrent.ExecutionException;
 
 import applications.PortScanner;
 import applications.ShowProperties;
+import applications.SlowLoris;
 import applications.WindowsCommandLineIPandPing;
 import applications.YourIPLookup;
 import javafx.application.Application;
@@ -120,11 +121,19 @@ public class JFX extends Application{
 				//Create textfield for number of threads allowed
 				TextField threadsAllowed = new TextField();
 				threadsAllowed.setText("4");
-
+				
+				//create textfield for port number
+				TextField portSpecified = new TextField();
+				portSpecified.setText("80");
+				
+				//create text field for the time allowed to attack
+				
+				TextField timeAllowed = new TextField();
+				timeAllowed.setText("0");
 				
 				//create buttons for foreign machines
 				Button FPortScannerButton = new Button("IP Port Scanner");
-				
+				Button SlowLorisButton = new Button("Slow Loris Attack");
 				
 				
 				
@@ -137,7 +146,7 @@ public class JFX extends Application{
 				HBox HBoxFTools = new HBox();
 				HBoxFTools.setSpacing(10);
 				ObservableList FToolsList = HBoxFTools.getChildren(); //retrieving the observable list of the VBox 
-				FToolsList.addAll(FPortScannerButton);
+				FToolsList.addAll(FPortScannerButton, SlowLorisButton);
 				
 				
 				//create new VBox || for system info buttons
@@ -334,6 +343,14 @@ public class JFX extends Application{
 				    }
 				});
 				
+				
+				SlowLorisButton.setOnAction(new EventHandler<ActionEvent>() {
+				    @Override public void handle(ActionEvent e) {
+				    	outputText.setText(outputText.getText());
+				        outputText.setText(outputText.getText() + "Running slow loris attack on" + FIP.getText() + "on port " + portSpecified.getText() + "with " + threadsAllowed.getText() + "threads for " + timeAllowed.getText() + " time. Please use responsibly and with permission from the owner.");
+				        SlowLoris.slowLorisRun(FIP.getText(), portSpecified.getText(), threadsAllowed.getText(), timeAllowed.getText());
+				    }
+				});
 				
 		
 		
