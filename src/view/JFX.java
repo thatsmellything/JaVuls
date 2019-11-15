@@ -93,6 +93,7 @@ public class JFX extends Application{
 				//Create labels
 				Label localInformation = new Label("Local Information Gathering");
 				Label FInformation = new Label("Foreign IP Scanning Tools");
+				Label threadLabel = new Label("Number of threads");
 				
 				
 				//Strings needed to make life easier
@@ -132,12 +133,18 @@ public class JFX extends Application{
 				textScroll.setPrefSize(512, 360);
 				textScroll.setContent(outputText);
 				
+				//Create new HBOX for forgein tools underneath ip addresss bar
+				HBox HBoxFTools = new HBox();
+				HBoxFTools.setSpacing(10);
+				ObservableList FToolsList = HBoxFTools.getChildren(); //retrieving the observable list of the VBox 
+				FToolsList.addAll(FPortScannerButton);
+				
 				
 				//create new VBox || for system info buttons
 				VBox VBoxFSysInfoButtons = new VBox();
 				VBoxFSysInfoButtons.setSpacing(10);//Amount of space inbetween each node in the vbox
 				ObservableList list = VBoxFSysInfoButtons.getChildren(); //retrieving the observable list of the VBox 
-				list.addAll(FInformation, FIP, FPortScannerButton, threadsAllowed);
+				list.addAll(FInformation, FIP, HBoxFTools, threadLabel, threadsAllowed);
 				
 				//create VBox for text space and the clear button
 				VBox VBoxTextAndClear = new VBox();
