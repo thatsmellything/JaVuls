@@ -2,13 +2,11 @@ package testFiles;
 
 import java.net.MalformedURLException;
 
-/**
- * Created by connor on 14/11/15.
- */
+
 public class mainForSlowLoris
 {
 	
-	public void slowLorisRun(String target, int port, int threads, int time)
+	public static void slowLorisRun(String target, int port, int threads, int time)
 	{
 		if(target.equals(null))
 		{
@@ -44,7 +42,7 @@ public class mainForSlowLoris
 	        }
 		
 	}
-	
+	/*
     public static void main(String[] args)
     {
         if(args.length != 4)
@@ -82,6 +80,8 @@ public class mainForSlowLoris
      * prints an error message and exits the program
      * @param deathMsg msg that indicates the cause of the fatal error
      */
+	
+	
     private static void die(String deathMsg)
     {
         System.err.println(deathMsg);

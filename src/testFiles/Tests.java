@@ -16,17 +16,20 @@ public class Tests
 	public static void main(String[] args)
 	{
 		//creates a string of the operating system for future usage
-		String localOS = ShowProperties.getOperatingSystem();
+		//String localOS = ShowProperties.getOperatingSystem();
 		
+		mainForSlowLoris.slowLorisRun("http://judkinscustomtaxidermy.com", 80, 0, 0);
+		/*
 		try {
 			
 			//Grabs the operating system that the program is running on
-			ShowProperties.getOperatingSystem();
+			//ShowProperties.getOperatingSystem();
 			//Gets your local machine IP
-			YourIPLookup.getLocalIP();
-			YourIPLookup.viewMyIP();
+			//YourIPLookup.getLocalIP();
+			//YourIPLookup.viewMyIP();
 			
 			//if machine is on windows it will run the windows version of command line tools
+			
 			if (localOS.equals("Windows 10"))
 			{
 				WindowsCommandLineIPandPing.windowsPing("8.8.8.8");
@@ -58,7 +61,7 @@ public class Tests
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		
+		*/
 		
 		
 		
