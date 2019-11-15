@@ -1,9 +1,9 @@
-package testFiles;
+package applications;
 
 import java.net.MalformedURLException;
 
 
-public class mainForSlowLoris
+public class SlowLoris
 {
 	
 	public static void slowLorisRun(String target, int port, int threads, int time)

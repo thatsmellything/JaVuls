@@ -1,12 +1,10 @@
-package testFiles;
+package applications;
 
 import java.io.IOException;
 import java.net.*;
 import java.util.Random;
 
-/**
- * Created by connor on 14/11/15.
- */
+
 public class Connector implements Runnable
 {
     /** the number of socket connections to the server per `Connector` instance */

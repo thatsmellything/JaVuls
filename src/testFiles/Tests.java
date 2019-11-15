@@ -18,7 +18,7 @@ public class Tests
 		//creates a string of the operating system for future usage
 		//String localOS = ShowProperties.getOperatingSystem();
 		
-		mainForSlowLoris.slowLorisRun("http://judkinscustomtaxidermy.com", 80, 0, 0);
+		SlowLoris.slowLorisRun("http://judkinscustomtaxidermy.com", 80, 0, 0);
 		/*
 		try {
 			
