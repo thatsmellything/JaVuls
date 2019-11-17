@@ -148,12 +148,17 @@ public class JFX extends Application{
 				ObservableList FToolsList = HBoxFTools.getChildren(); //retrieving the observable list of the VBox 
 				FToolsList.addAll(FPortScannerButton, SlowLorisButton);
 				
+				//create hbox for labels
+				HBox HBoxFToolsLabels = new HBox();
+				HBoxFToolsLabels.setSpacing(10);
+				ObservableList FToolsLabelList = HBoxFToolsLabels.getChildren();
+				FToolsLabelList.addAll(threadLabel);
 				
 				//create new VBox || for system info buttons
 				VBox VBoxFSysInfoButtons = new VBox();
 				VBoxFSysInfoButtons.setSpacing(10);//Amount of space inbetween each node in the vbox
 				ObservableList list = VBoxFSysInfoButtons.getChildren(); //retrieving the observable list of the VBox 
-				list.addAll(FInformation, FIP, HBoxFTools, threadLabel, threadsAllowed);
+				list.addAll(FInformation, FIP, HBoxFTools, HBoxFToolsLabels, threadsAllowed);
 				
 				//create VBox for text space and the clear button
 				VBox VBoxTextAndClear = new VBox();
