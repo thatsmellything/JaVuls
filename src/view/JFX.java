@@ -151,19 +151,19 @@ public class JFX extends Application{
 				
 				//create vbox for threads and thread label
 				VBox VBoxThreads = new VBox();
-				VBoxThreads.setSpacing(10);
+				VBoxThreads.setSpacing(8);
 				ObservableList VBoxThreadsList = VBoxThreads.getChildren();
 				VBoxThreadsList.addAll(threadLabel, threadsAllowed);
 				
 				//create vbox for port number and label
 				VBox VBoxPort = new VBox();
-				VBoxPort.setSpacing(10);
+				VBoxPort.setSpacing(8);
 				ObservableList VBoxPortList = VBoxThreads.getChildren();
 				VBoxPortList.addAll(portLabel, portSpecified);
 				
 				//create vbox for time allowed
 				VBox VBoxTime = new VBox();
-				VBoxTime.setSpacing(10);
+				VBoxTime.setSpacing(8);
 				ObservableList VBoxTimeList = VBoxTime.getChildren();
 				VBoxTimeList.addAll(timeLabel, timeAllowed);
 				
@@ -171,9 +171,9 @@ public class JFX extends Application{
 				
 				//create hbox for labels
 				HBox HBoxFToolsLabels = new HBox();
-				HBoxFToolsLabels.setSpacing(10);
+				HBoxFToolsLabels.setSpacing(5);
 				ObservableList FToolsLabelList = HBoxFToolsLabels.getChildren();
-				FToolsLabelList.addAll(VBoxThreads, VBoxPort, VBoxTime);
+				FToolsLabelList.addAll(VBoxThreads, VBoxTime);
 				
 				
 				
