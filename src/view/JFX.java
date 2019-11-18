@@ -95,7 +95,8 @@ public class JFX extends Application{
 				Label localInformation = new Label("Local Information Gathering");
 				Label FInformation = new Label("Foreign IP Scanning Tools");
 				Label threadLabel = new Label("Number of threads");
-				
+				Label portLabel = new Label("Port to attack");
+				Label timeLabel = new Label("Time for attack");
 				
 				//Strings needed to make life easier
 				String newLine = "\n";
@@ -148,17 +149,39 @@ public class JFX extends Application{
 				ObservableList FToolsList = HBoxFTools.getChildren(); //retrieving the observable list of the VBox 
 				FToolsList.addAll(FPortScannerButton, SlowLorisButton);
 				
+				//create vbox for threads and thread label
+				VBox VBoxThreads = new VBox();
+				VBoxThreads.setSpacing(10);
+				ObservableList VBoxThreadsList = VBoxThreads.getChildren();
+				VBoxThreadsList.addAll(threadLabel, threadsAllowed);
+				
+				//create vbox for port number and label
+				VBox VBoxPort = new VBox();
+				VBoxPort.setSpacing(10);
+				ObservableList VBoxPortList = VBoxThreads.getChildren();
+				VBoxPortList.addAll(portLabel, portSpecified);
+				
+				//create vbox for time allowed
+				VBox VBoxTime = new VBox();
+				VBoxTime.setSpacing(10);
+				ObservableList VBoxTimeList = VBoxTime.getChildren();
+				VBoxTimeList.addAll(timeLabel, timeAllowed);
+				
+				
+				
 				//create hbox for labels
 				HBox HBoxFToolsLabels = new HBox();
 				HBoxFToolsLabels.setSpacing(10);
 				ObservableList FToolsLabelList = HBoxFToolsLabels.getChildren();
-				FToolsLabelList.addAll(threadLabel);
+				FToolsLabelList.addAll(VBoxThreads, VBoxPort, VBoxTime);
+				
+				
 				
 				//create new VBox || for system info buttons
 				VBox VBoxFSysInfoButtons = new VBox();
 				VBoxFSysInfoButtons.setSpacing(10);//Amount of space inbetween each node in the vbox
 				ObservableList list = VBoxFSysInfoButtons.getChildren(); //retrieving the observable list of the VBox 
-				list.addAll(FInformation, FIP, HBoxFTools, HBoxFToolsLabels, threadsAllowed);
+				list.addAll(FInformation, FIP, HBoxFTools, HBoxFToolsLabels);
 				
 				//create VBox for text space and the clear button
 				VBox VBoxTextAndClear = new VBox();
