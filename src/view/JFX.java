@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.concurrent.ExecutionException;
 
+import javax.swing.JOptionPane;
+
 import applications.PortScanner;
 import applications.ShowProperties;
 import applications.SlowLoris;
@@ -375,7 +377,8 @@ public class JFX extends Application{
 				SlowLorisButton.setOnAction(new EventHandler<ActionEvent>() {
 				    @Override public void handle(ActionEvent e) {
 				    	outputText.setText(outputText.getText());
-				        outputText.setText(outputText.getText() + "Running slow loris attack on" + FIP.getText() + "on port " + portSpecified.getText() + "with " + threadsAllowed.getText() + "threads for " + timeAllowed.getText() + " time. Please use responsibly and with permission from the owner.");
+				    	JOptionPane.showMessageDialog(null, "THIS TOOL IS ONLY TO BE USED ON MACHINES AND APPLICATIONS WITH PERMISSION");
+				        outputText.setText(outputText.getText() + "Running slow loris attack on " + FIP.getText() + " on port " + portSpecified.getText() + " with " + threadsAllowed.getText() + " threads for " + timeAllowed.getText() + " time. Please use responsibly and with permission from the owner.");
 				        SlowLoris.slowLorisRun(FIP.getText(), portSpecified.getText(), threadsAllowed.getText(), timeAllowed.getText());
 				    }
 				});
