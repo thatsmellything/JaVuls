@@ -173,7 +173,7 @@ public class JFX extends Application{
 				HBox HBoxFToolsLabels = new HBox();
 				HBoxFToolsLabels.setSpacing(5);
 				ObservableList FToolsLabelList = HBoxFToolsLabels.getChildren();
-				FToolsLabelList.addAll(VBoxThreads, VBoxTime);
+				FToolsLabelList.addAll(VBoxThreads,VBoxTime, VBoxPort);
 				
 				
 				
