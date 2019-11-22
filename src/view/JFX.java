@@ -98,6 +98,7 @@ public class JFX extends Application{
 				outputText.setText("JaVuls");
 				Button clearButton = new Button("Clear Text");
 				
+				
 				//Create labels
 				Label localInformation = new Label("Local Information Gathering");
 				Label FInformation = new Label("Foreign IP Scanning Tools");
@@ -167,6 +168,9 @@ public class JFX extends Application{
 				textScroll.setPrefSize(512, 360);
 				textScroll.setContent(outputText);
 				
+				
+				
+				
 				//Create new HBOX for forgein tools underneath ip addresss bar
 				HBox HBoxFTools = new HBox();
 				HBoxFTools.setSpacing(10);
@@ -212,6 +216,7 @@ public class JFX extends Application{
 				VBoxFSysInfoButtons.setSpacing(10);//Amount of space inbetween each node in the vbox
 				ObservableList list3 = VBoxTextAndClear.getChildren(); //retrieving the observable list of the VBox 
 				list.addAll(textScroll, clearButton);
+				//outputText.setWrappingWidth(VBoxTextAndClear.getWidth());
 				
 				
 					//create new VBox || for system info buttons
@@ -310,6 +315,7 @@ public class JFX extends Application{
 				localPortScannerButton.setOnAction(new EventHandler<ActionEvent>() {
 				    @Override public void handle(ActionEvent e) {
 				    	outputText.setText(outputText.getText());
+				    	outputText.setText(outputText.getText() + "This part of the program functions best when the threads allowed is set to 0. This will let the computer make threads until it no longer needs them and is the optimal way to save memory and still have the best speed. Having too many threads will cause a memory leakage while having too little will cause a slow scan.");
 				        try {
 							outputText.setText(outputText.getText() + newLine + PortScanner.localPortScan(threadsAllowed.getText()) + newLine);
 						} catch (UnknownHostException e1) {
