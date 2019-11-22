@@ -8,6 +8,7 @@ import java.util.concurrent.ExecutionException;
 
 import javax.swing.JOptionPane;
 
+import applications.IPLookup;
 import applications.PortScanner;
 import applications.ShowProperties;
 import applications.SlowLoris;
@@ -99,6 +100,7 @@ public class JFX extends Application{
 				Label threadLabel = new Label("Number of threads");
 				Label portLabel = new Label("Port to attack");
 				Label timeLabel = new Label("Time for attack");
+				Label windowsToolsLabel = new Label("Windows Tools");
 				
 				//Strings needed to make life easier
 				String newLine = "\n";
@@ -108,6 +110,8 @@ public class JFX extends Application{
 				//create buttons for local machine
 				Button localOSButton = new Button("System OS");
 				Button localInfoButton = new Button("System Information");
+				Button localIPButton = new Button("Check Local IP");
+				Button publicIPButton = new Button("Check Public IP");
 				Button localArchButton = new Button("System Architecture");
 				Button localPortScannerButton = new Button("Local Port Scanner");
 				Button localARPButton = new Button("Local ARP Scan");
@@ -196,7 +200,7 @@ public class JFX extends Application{
 					VBox VBoxSysInfoButtons = new VBox();
 					VBoxSysInfoButtons.setSpacing(10);//Amount of space inbetween each node in the vbox
 					ObservableList list2 = VBoxSysInfoButtons.getChildren(); //retrieving the observable list of the VBox 
-					list2.addAll(localInformation, localOSButton, localInfoButton, localArchButton, localPortScannerButton, localARPButton, localConsoleButton, localFileExplorerButton);//Adding all the nodes to the observable list 
+					list2.addAll(localInformation, localOSButton, localInfoButton, localIPButton, publicIPButton, localArchButton, localPortScannerButton, localARPButton, windowsToolsLabel, localConsoleButton, localFileExplorerButton);//Adding all the nodes to the observable list 
 
 					      
 					    //Create an HBox to hold multiple vboxes
@@ -247,17 +251,41 @@ public class JFX extends Application{
 				    }
 				});
 				
+				localIPButton.setOnAction(new EventHandler<ActionEvent>() {
+				    @Override public void handle(ActionEvent e) {
+				    	outputText.setText(outputText.getText());
+				    	try {
+							outputText.setText(outputText.getText() + newLine + YourIPLookup.getLocalIP() + newLine);
+						} catch (UnknownHostException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+				    }
+				});
+				
+				publicIPButton.setOnAction(new EventHandler<ActionEvent>() {
+				    @Override public void handle(ActionEvent e) {
+				    	outputText.setText(outputText.getText());
+				    	try {
+							outputText.setText(outputText.getText() + newLine + IPLookup.yourPublicIP() + newLine);
+						} catch (UnknownHostException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+				    }
+				});
+				
 				localArchButton.setOnAction(new EventHandler<ActionEvent>() {
 				    @Override public void handle(ActionEvent e) {
 				    	outputText.setText(outputText.getText());
-				        outputText.setText(outputText.getText() + newLine + ShowProperties.getOperatingSystemArchitecture() + newLine);
+				        outputText.setText(outputText.getText() + newLine + ShowProperties.getOperatingSystemArchitecture() + newLine + "Check console output for more clear text");
 				    }
 				});
 				
 				localARPButton.setOnAction(new EventHandler<ActionEvent>() {
 				    @Override public void handle(ActionEvent e) {
 				    	outputText.setText(outputText.getText());
-				        outputText.setText(outputText.getText() + newLine + WindowsCommandLineIPandPing.windowsARP() + newLine);
+				        outputText.setText(outputText.getText() + newLine + WindowsCommandLineIPandPing.windowsARP() + newLine + "Check console output");
 				    }
 				});
 				
