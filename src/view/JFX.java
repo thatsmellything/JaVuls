@@ -101,6 +101,7 @@ public class JFX extends Application{
 				Label portLabel = new Label("Port to attack");
 				Label timeLabel = new Label("Time for attack");
 				Label windowsToolsLabel = new Label("Windows Tools");
+				Label linuxToolsLabel = new Label("Linux Tools");
 				
 				//Strings needed to make life easier
 				String newLine = "\n";
@@ -200,7 +201,7 @@ public class JFX extends Application{
 					VBox VBoxSysInfoButtons = new VBox();
 					VBoxSysInfoButtons.setSpacing(10);//Amount of space inbetween each node in the vbox
 					ObservableList list2 = VBoxSysInfoButtons.getChildren(); //retrieving the observable list of the VBox 
-					list2.addAll(localInformation, localOSButton, localInfoButton, localIPButton, publicIPButton, localArchButton, localPortScannerButton, localARPButton, windowsToolsLabel, localConsoleButton, localFileExplorerButton);//Adding all the nodes to the observable list 
+					list2.addAll(localInformation, localOSButton, localInfoButton, localIPButton, publicIPButton, localArchButton, localPortScannerButton, localARPButton, windowsToolsLabel, localConsoleButton, localFileExplorerButton, linuxToolsLabel);//Adding all the nodes to the observable list 
 
 					      
 					    //Create an HBox to hold multiple vboxes
