@@ -3,6 +3,7 @@ package view;
 import java.awt.GraphicsEnvironment;
 import java.io.Console;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.UnknownHostException;
 import java.util.concurrent.ExecutionException;
 
@@ -26,6 +27,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -35,6 +38,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 import testFiles.OpenCommandPrompt;
+
 
 public class JFX extends Application{
 	
@@ -106,8 +110,21 @@ public class JFX extends Application{
 				//Strings needed to make life easier
 				String newLine = "\n";
 				
+				//Add image view for animations
+				ImageView statusImage = new ImageView();
+					//add heigh and width of image view
+					statusImage.setFitHeight(200); 
+					statusImage.setFitWidth(200); 
+			      
+					//Setting the preserve ratio of the image view 
+					statusImage.setPreserveRatio(true);
 				
+				Image defaultImage = new Image("jparkhack2.gif");
+				//set the default image
+					statusImage.setImage(defaultImage);
 				
+
+					
 				//create buttons for local machine
 				Button localOSButton = new Button("System OS");
 				Button localInfoButton = new Button("System Information");
@@ -180,7 +197,7 @@ public class JFX extends Application{
 				HBox HBoxFToolsLabels = new HBox();
 				HBoxFToolsLabels.setSpacing(5);
 				ObservableList FToolsLabelList = HBoxFToolsLabels.getChildren();
-				FToolsLabelList.addAll(VBoxThreads,VBoxTime, VBoxPort);
+				FToolsLabelList.addAll(VBoxThreads,VBoxTime, VBoxPort, statusImage);
 				
 				
 				
