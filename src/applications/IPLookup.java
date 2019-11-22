@@ -2,8 +2,7 @@ package applications;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-// Java program to demonstrate 
-// how to fetch public IP Address 
+ 
 import java.net.*; 
 //import java.*; 
 
