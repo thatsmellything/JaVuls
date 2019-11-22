@@ -311,7 +311,7 @@ public class JFX extends Application{
 				    @Override public void handle(ActionEvent e) {
 				    	outputText.setText(outputText.getText());
 				        try {
-							outputText.setText(outputText.getText() + newLine + PortScanner.localPortScan() + newLine);
+							outputText.setText(outputText.getText() + newLine + PortScanner.localPortScan(threadsAllowed.getText()) + newLine);
 						} catch (UnknownHostException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
