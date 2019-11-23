@@ -216,7 +216,7 @@ public class JFX extends Application{
 				VBoxFSysInfoButtons.setSpacing(10);//Amount of space inbetween each node in the vbox
 				ObservableList list3 = VBoxTextAndClear.getChildren(); //retrieving the observable list of the VBox 
 				list.addAll(textScroll, clearButton);
-				//outputText.setWrappingWidth(VBoxTextAndClear.getWidth());
+				// outputText.setWrappingWidth(VBoxTextAndClear.getWidth());
 				
 				
 					//create new VBox || for system info buttons
