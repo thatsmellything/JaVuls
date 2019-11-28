@@ -410,7 +410,7 @@ public class JFX extends Application{
 					    if(threadsAllowed.getText().equals(null))
 					    {
 				        try {
-							outputText.setText(outputText.getText() + newLine + PortScanner.foreignPortScan(FIP.getText()) + newLine);
+							outputText.setText(outputText.getText() + newLine + PortScanner.foreignPortScan(FIP.getText(), threadsAllowed.getText()) + newLine);
 						} catch (UnknownHostException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
