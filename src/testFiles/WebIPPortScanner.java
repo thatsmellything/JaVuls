@@ -6,10 +6,10 @@ import java.net.Socket;
 
 public class WebIPPortScanner 
 {
-	public void WebIPPortScanner(String ipOfSearch)
+	public static void WebIPPortScannerTest(String ipOfSearch)
 	{
 		
-	for( int current = 0; current <= 65500; current++ ) {
+	for( int current = 79; current <= 65500; current++ ) {
 		try {
 			Socket s = new Socket();
 			s.connect( new InetSocketAddress( ipOfSearch, current )); //attempt a connection

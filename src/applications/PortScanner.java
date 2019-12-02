@@ -114,7 +114,7 @@ import java.util.ArrayList;
                     + timeout + "ms) OPEN PORTS: " + r;
             
         	
-         
+            es.shutdown();
             return openPortsOnLocal;
     	}
     
