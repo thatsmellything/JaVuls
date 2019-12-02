@@ -1,4 +1,5 @@
 package applications;
+import java.io.IOException;
 import java.net.InetSocketAddress;
     import java.net.Socket;
 import java.net.UnknownHostException;
@@ -122,6 +123,11 @@ import java.util.ArrayList;
     
     public static String foreignPortScan(String ipOfSearch, String threads) throws UnknownHostException, InterruptedException, ExecutionException
     {
+    	
+    	
+    	
+    	
+    	
     	int threadsAllowed = Integer.parseInt(threads);
     	
     	if(threadsAllowed == 0)
