@@ -48,51 +48,12 @@ public class JFX extends Application{
 	@Override
 	public void start(Stage primaryStage)
 	{
-		/*
 		
-		//Create the gridpane
-		GridPane pane = new GridPane();
-		pane.setAlignment(Pos.CENTER);
-		
-		//Set title for the stage
-		primaryStage.setTitle("JaVuls");
-		
-		//Create the scene
-		Scene primaryScene = new Scene(pane, 500, 500);
-		
-				//Create the buttons needed
-				Button IPLookup = new Button("Scan IP Address");
-				Button ScanIPPorts = new Button("Scan IP Ports");
-					//Add buttons to grid pane
-					pane.add(IPLookup, 0, 1, 1, 1);
-				
-				//Create the textFields needed
-				TextField IPAddress = new TextField();
-					//add textFields to grid pane
-					pane.add(IPAddress, 0, 0, 1, 1);
-					
-		//Show the stage and jazz
-		primaryStage.setScene(primaryScene);
-		primaryStage.show();
-		
-		*/
 		//Creates the Pane for the GUI
 				StackPane pane = new StackPane();
 				
 				
 				
-				//Creates the texts, changes the color and adds the text to the screen
-					//Hello portion
-				/*	
-				Text helloText = new Text();
-					helloText.setText("Hello ");
-					helloText.setFill(Color.BLUE);
-					//World portion
-					Text worldText = new Text();
-					worldText.setText("World!");
-					worldText.setFill(Color.DARKORANGE);
-					//Add the texts to the screen
-				*/	
 				
 				//Create texts and clear button
 				Text outputText = new Text();
