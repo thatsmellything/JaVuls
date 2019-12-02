@@ -73,6 +73,13 @@ public class JFX extends Application{
 				//Strings needed to make life easier
 				String newLine = "\n";
 				
+				
+				
+				
+				
+				
+				
+				
 				//Add image view for animations
 				ImageView statusImage = new ImageView();
 					//add heigh and width of image view
@@ -82,11 +89,21 @@ public class JFX extends Application{
 					//Setting the preserve ratio of the image view 
 					statusImage.setPreserveRatio(true);
 				
-				Image defaultImage = new Image("jparkhack2.gif");
+					
 				//set the default image
+					Image defaultImage = new Image("jparkhack2.gif");
 					statusImage.setImage(defaultImage);
 				
 
+					
+					
+					
+					
+					
+					
+					
+					
+					
 					
 				//create buttons for local machine
 				Button localOSButton = new Button("System OS");
@@ -159,11 +176,35 @@ public class JFX extends Application{
 				
 				
 				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
 				//create hbox for labels
 				HBox HBoxFToolsLabels = new HBox();
 				HBoxFToolsLabels.setSpacing(5);
 				ObservableList FToolsLabelList = HBoxFToolsLabels.getChildren();
 				FToolsLabelList.addAll(VBoxThreads,VBoxTime, VBoxPort, statusImage);
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
 				
 				
 				
@@ -368,7 +409,9 @@ public class JFX extends Application{
 				FPortScannerButton.setOnAction(new EventHandler<ActionEvent>() {
 				    @Override public void handle(ActionEvent e) {
 				    	outputText.setText(outputText.getText());
-					    WebIPPortScanner.WebIPPortScannerTest(FIP.getText());
+				    	Thread fpThread = new Thread(new WebIPPortScanner());
+				    	fpThread.start();
+					    outputText.setText(outputText.getText() + newLine + WebIPPortScanner.WebIPPortScannerTest(FIP.getText()));
 					    
 					    }
 				    
@@ -384,9 +427,15 @@ public class JFX extends Application{
 				    }
 				});
 				
+				
+				
+				
 		
 		
 	}
+	
+	
+	
 	
 	public static void main(String[] args)
 	{
