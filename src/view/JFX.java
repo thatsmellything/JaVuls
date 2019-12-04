@@ -4,8 +4,13 @@ import java.awt.GraphicsEnvironment;
 import java.io.Console;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.InetSocketAddress;
+import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.JOptionPane;
 
@@ -43,7 +48,7 @@ import testFiles.*;
 
 public class JFX extends Application{
 	
-	
+	String FIPTextInString;
 	
 	@Override
 	public void start(Stage primaryStage)
@@ -121,7 +126,7 @@ public class JFX extends Application{
 				FIP.setText("Input IP or URL here");
 
 				String FIPtext = FIP.getText();
-
+				
 				
 				//Create textfield for number of threads allowed
 				TextField threadsAllowed = new TextField();
@@ -338,22 +343,6 @@ public class JFX extends Application{
 				
 				localConsoleButton.setOnAction(new EventHandler<ActionEvent>() {
 				    @Override public void handle(ActionEvent e) {
-				    	/*
-				    	 Console console = System.console();
-				         if(console == null && !GraphicsEnvironment.isHeadless()){
-				             String filename = OpenCommandPrompt.class.getProtectionDomain().getCodeSource().getLocation().toString().substring(6);
-				             try {
-								Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"cd \"");
-							} catch (IOException e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
-							}
-				         }else{
-				             WindowsCommandLineIPandPing.main(new String[0]);
-				             System.out.println("Program has ended, please type 'exit' to close the console");
-				         }
-				         */
-				         
 				    	
 				    	try
 				        {  
@@ -374,22 +363,6 @@ public class JFX extends Application{
 				
 				localFileExplorerButton.setOnAction(new EventHandler<ActionEvent>() {
 				    @Override public void handle(ActionEvent e) {
-				    	/*
-				    	 Console console = System.console();
-				         if(console == null && !GraphicsEnvironment.isHeadless()){
-				             String filename = OpenCommandPrompt.class.getProtectionDomain().getCodeSource().getLocation().toString().substring(6);
-				             try {
-								Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"dir && ping localhost\"");
-							} catch (IOException e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
-							}
-				         }else{
-				             WindowsCommandLineIPandPing.main(new String[0]);
-				             System.out.println("Program has ended, please type 'exit' to close the console");
-				         }
-				         
-				         */
 				    	
 				    	try
 				        {  
@@ -407,14 +380,42 @@ public class JFX extends Application{
 				});
 				
 				FPortScannerButton.setOnAction(new EventHandler<ActionEvent>() {
+					
 				    @Override public void handle(ActionEvent e) {
+				    	/*
 				    	outputText.setText(outputText.getText());
-				    	Thread fpThread = new Thread(new WebIPPortScanner());
-				    	fpThread.start();
+				    	int threads = Integer.parseInt(threadsAllowed.getText());
+				    	ExecutorService ex = Executors.newFixedThreadPool(threads);
+				    	
+				    	Thread t = new Thread(new MyRunnable(FIP.getText()));
+				    	t.start();
+						//ex.submit(task2);
+				    	
+				    	
+				    	
+				    	
 					    outputText.setText(outputText.getText() + newLine + WebIPPortScanner.WebIPPortScannerTest(FIP.getText()));
-					    
+					    t.stop();
 					    }
-				    
+					    */
+					
+					
+				    	JOptionPane.showMessageDialog(null, "THIS TOOL IS ONLY TO BE USED ON MACHINES AND APPLICATIONS WITH PERMISSION! Port scanning can be noisey");
+					outputText.setText(outputText.getText());
+			    	outputText.setText(outputText.getText() + "This part of the program functions best when the threads allowed is set to 0. This will let the computer make threads until it no longer needs them and is the optimal way to save memory and still have the best speed. Having too many threads will cause a memory leakage while having too little will cause a slow scan.");
+			        try {
+						outputText.setText(outputText.getText() + newLine + PortScanner.foreignPortScan(FIP.getText(), threadsAllowed.getText()) + newLine);
+					} catch (UnknownHostException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (InterruptedException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (ExecutionException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				    }
 				});
 				
 				
@@ -432,9 +433,40 @@ public class JFX extends Application{
 				
 		
 		
+	
+	
+	
+	
 	}
 	
 	
+	
+	
+	/*
+	Runnable task2 = new Runnable() {
+		@Override
+		public void run() {
+			StringBuilder str = new StringBuilder("Open Ports on " + FIPTextInString + ":");
+			
+			for( int current = 78; current <= 81; current++ ) {
+				try {
+					Socket s = new Socket();
+					s.connect( new InetSocketAddress( FIPTextInString, current )); //attempt a connection
+					s.close();
+					
+					//System.out.println(( "Open port: " + current + System.lineSeparator() ));
+					str.append(current + System.lineSeparator());
+				}
+				catch( IOException ioe ) { //connection failed
+					System.out.println("connection failed");
+					}
+				}
+			
+			String stringFinal = str.toString();
+			
+		}
+};
+	*/
 	
 	
 	public static void main(String[] args)
@@ -443,3 +475,45 @@ public class JFX extends Application{
 	}
 
 }
+
+
+
+/*
+
+class MyRunnable implements Runnable {
+    private String x;
+    public MyRunnable(String x) {
+       this.x = x;
+    }
+
+    public void run() {
+    	StringBuilder str = new StringBuilder("Open Ports on " + x + ":");
+		
+    	for( int current = 0; current <= 20; current++ ) {
+    		try {
+    			Socket s = new Socket();
+    			s.connect( new InetSocketAddress( x, current )); //attempt a connection
+    			s.close();
+    			
+    			//System.out.println(( "Open port: " + current + System.lineSeparator() ));
+    			str.append(current + System.lineSeparator());
+    		}
+    		catch( IOException ioe ) { //connection failed
+    			System.out.println("connection failed on " + current);
+    			}
+    		}
+    	
+    	String stringFinal = str.toString();
+    	
+    	
+    }
+ }
+
+
+// Thread t = new Thread(new MyRunnable(x));
+// t.start();
+// }
+// }
+*/
+
+
