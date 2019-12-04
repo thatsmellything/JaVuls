@@ -22,8 +22,8 @@ public class SlowLoris
 		}
 		if(threadNum == 0)
 		{
-			System.out.println("No number of threads specified, using maximum allowed (UNSTABLE)");
-			threadNum = 2147483647;
+			System.out.println("No number of threads specified, using 20000");
+			threadNum = 20000;
 		}
 		if(timeNum == 0)
 		{
