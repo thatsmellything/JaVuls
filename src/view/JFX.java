@@ -97,6 +97,9 @@ public class JFX extends Application{
 					
 				//set the default image
 					Image defaultImage = new Image("jparkhack2.gif");
+					Image hackerImageJPark = new Image("jparkhack.gif");
+					Image hackerImageCat = new Image("catHacker.gif");
+					Image hackerImageCat2 = new Image("cat2.gif");
 					statusImage.setImage(defaultImage);
 				
 
@@ -322,6 +325,8 @@ public class JFX extends Application{
 				
 				localPortScannerButton.setOnAction(new EventHandler<ActionEvent>() {
 				    @Override public void handle(ActionEvent e) {
+				    	
+				    	statusImage.setImage(hackerImageJPark);
 				    	outputText.setText(outputText.getText());
 				    	outputText.setText(outputText.getText() + "This part of the program functions best when the threads allowed is set to 0. This will let the computer make threads until it no longer needs them and is the optimal way to save memory and still have the best speed. Having too many threads will cause a memory leakage while having too little will cause a slow scan.");
 				        try {
@@ -336,6 +341,7 @@ public class JFX extends Application{
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
+				        statusImage.setImage(defaultImage);
 				    }
 				});
 				
@@ -399,7 +405,7 @@ public class JFX extends Application{
 					    }
 					    */
 					
-					
+				    	statusImage.setImage(hackerImageJPark);
 				    	JOptionPane.showMessageDialog(null, "THIS TOOL IS ONLY TO BE USED ON MACHINES AND APPLICATIONS WITH PERMISSION! Port scanning can be noisey");
 					outputText.setText(outputText.getText());
 			    	outputText.setText(outputText.getText() + "This part of the program functions best when the threads allowed is set to 0. This will let the computer make threads until it no longer needs them and is the optimal way to save memory and still have the best speed. Having too many threads will cause a memory leakage while having too little will cause a slow scan.");
