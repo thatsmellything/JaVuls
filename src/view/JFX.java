@@ -133,7 +133,7 @@ public class JFX extends Application{
 				
 				//Create textfield for number of threads allowed
 				TextField threadsAllowed = new TextField();
-				threadsAllowed.setText("4");
+				threadsAllowed.setText("0");
 				
 				//create textfield for port number
 				TextField portSpecified = new TextField();
@@ -341,7 +341,7 @@ public class JFX extends Application{
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
-				        statusImage.setImage(defaultImage);
+				        
 				    }
 				});
 				
