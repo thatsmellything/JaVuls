@@ -45,7 +45,7 @@ public class BruteCrack
 				md.reset();
 				md.update(new String(guess).getBytes());
 				guess_hash = hashToString(md.digest());
-	
+				System.out.println(guess_hash);
 				if(hash.equals(guess_hash))
 				{
 					done = true;
@@ -92,6 +92,7 @@ public class BruteCrack
 		{
 			sb.append(Integer.toString((hash[i] & 0xff) + 0x100, 16).substring(1));
 		}
+		System.out.println(sb.toString());
 		return sb.toString();
 	}
 	
