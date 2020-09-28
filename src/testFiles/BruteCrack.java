@@ -95,6 +95,30 @@ public class BruteCrack
 		return sb.toString();
 	}
 	
+	public static String test(String testword)
+	{
+		try
+		{
+			BruteCrack bc = new BruteCrack();
+			long start;
+			long end;
+			String answer;
+		
+			start = System.nanoTime();
+			answer = bc.crack(testword);
+			end = System.nanoTime();
+		
+			System.out.println("Answer: " + answer);
+			System.out.println("Processing Time: " + ((end - start)/1000000000));
+			return answer;
+		}
+		catch(Exception e)
+		{
+			System.out.println("Exception: " + e.toString());
+			return "somethingfailed";
+		}
+	}
+	
 	public static void main(String args[])
 	{
 		if(args.length > 0)

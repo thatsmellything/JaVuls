@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 import javax.swing.JOptionPane;
 
-import applications.IPLookup;
+import applications.PublicIPLookupHost;
 import applications.PortScanner;
 import applications.ShowProperties;
 import applications.SlowLoris;
@@ -301,7 +301,7 @@ public class JFX extends Application{
 				    @Override public void handle(ActionEvent e) {
 				    	outputText.setText(outputText.getText());
 				    	try {
-							outputText.setText(outputText.getText() + newLine + IPLookup.yourPublicIP() + newLine);
+							outputText.setText(outputText.getText() + newLine + PublicIPLookupHost.yourPublicIP() + newLine);
 						} catch (UnknownHostException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
@@ -331,7 +331,8 @@ public class JFX extends Application{
 				    	outputText.setText(outputText.getText() + "This part of the program functions best when the threads allowed is set to 0. This will let the computer make threads until it no longer needs them and is the optimal way to save memory and still have the best speed. Having too many threads will cause a memory leakage while having too little will cause a slow scan.");
 				        try {
 							outputText.setText(outputText.getText() + newLine + PortScanner.localPortScan(threadsAllowed.getText()) + newLine);
-						} catch (UnknownHostException e1) {
+							Runtime.getRuntime().gc();
+				        } catch (UnknownHostException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						} catch (InterruptedException e1) {
