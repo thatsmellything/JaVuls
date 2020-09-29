@@ -92,7 +92,6 @@ public class BruteCrack
 		{
 			sb.append(Integer.toString((hash[i] & 0xff) + 0x100, 16).substring(1));
 		}
-		System.out.println(sb.toString());
 		return sb.toString();
 	}
 	
