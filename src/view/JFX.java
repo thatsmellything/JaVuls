@@ -59,15 +59,7 @@ public class JFX extends Application{
 				StackPane pane = new StackPane();
 
 				
-				//Create labels
-					Label localInformation = new Label("Local Information Gathering");
-					Label FInformation = new Label("Foreign IP Scanning Tools");
-					Label threadLabel = new Label("Number of threads");
-					Label portLabel = new Label("Port to attack");
-					Label timeLabel = new Label("Time for attack");
-					Label windowsToolsLabel = new Label("Windows Tools");
-					Label linuxToolsLabel = new Label("Linux Tools");
-				
+
 				//Strings needed to make life easier
 				String newLine = "\n";
 				
@@ -107,12 +99,33 @@ public class JFX extends Application{
 							Button FPortScannerButton = new Button("IP Port Scanner");
 							Button SlowLorisButton = new Button("Slow Loris Attack");
 				
-					//CREATING TEXT FIELDS
+							
+							
+							
+							
+							
+							
+							
+					//Create labels
+							Label localInformation = new Label("Local Information Gathering");
+							Label FInformation = new Label("Foreign IP Scanning Tools");
+							Label windowsToolsLabel = new Label("Windows Tools");
+							Label linuxToolsLabel = new Label("Linux Tools");
+						
+							
+							
+							
+							
+							
+							
+							
+					//CREATING TEXT FIELDS AND THEIR VBOX
 						//foreign IP
 							TextField FIP = new TextField();
 							FIP.setText("Input IP or URL here");
 							String FIPtext = FIP.getText();
 						//number of threads allowed
+							Label threadLabel = new Label("Number of threads");
 							TextField threadsAllowed = new TextField();
 							threadsAllowed.setText("0");
 							//create vbox for threads and thread label
@@ -121,6 +134,7 @@ public class JFX extends Application{
 								ObservableList VBoxThreadsList = VBoxThreads.getChildren();
 								VBoxThreadsList.addAll(threadLabel, threadsAllowed);
 						//port number
+							Label portLabel = new Label("Port to attack");
 							TextField portSpecified = new TextField();
 							portSpecified.setText("80");
 							//create vbox for port number and label
@@ -129,6 +143,7 @@ public class JFX extends Application{
 								ObservableList VBoxPortList = VBoxThreads.getChildren();
 								VBoxPortList.addAll(portLabel, portSpecified);
 						//time allowed to attack	
+							Label timeLabel = new Label("Time for Attack");
 							TextField timeAllowed = new TextField();
 							timeAllowed.setText("0");
 							//create vbox for time allowed
@@ -137,9 +152,22 @@ public class JFX extends Application{
 								ObservableList VBoxTimeList = VBoxTime.getChildren();
 								VBoxTimeList.addAll(timeLabel, timeAllowed);
 						//server directory
+							Label serverDirectoryLabel = new Label("Server Directory");
 							TextField specifiedDirectory = new TextField();
 							specifiedDirectory.setText("~");
+							//create vbox for server directory
+								VBox VBoxServerDirectory = new VBox();
+								VBoxServerDirectory.setSpacing(8);
+								ObservableList VBoxServerDirectoryList = VBoxServerDirectory.getChildren();
+								VBoxServerDirectoryList.addAll(serverDirectoryLabel, specifiedDirectory);
 				
+							
+							
+							
+							
+							
+							
+							
 				
 					//OUTPUT TEXT
 						//Make scrollable text field
@@ -161,7 +189,7 @@ public class JFX extends Application{
 				HBox HBoxFToolsLabels = new HBox();
 				HBoxFToolsLabels.setSpacing(5);
 				ObservableList FToolsLabelList = HBoxFToolsLabels.getChildren();
-				FToolsLabelList.addAll(VBoxThreads,VBoxTime, VBoxPort, statusImage);
+				FToolsLabelList.addAll(VBoxThreads,VBoxTime, VBoxPort, VBoxServerDirectory, statusImage);
 				
 				
 				
