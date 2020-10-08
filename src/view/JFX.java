@@ -108,19 +108,37 @@ public class JFX extends Application{
 							Button SlowLorisButton = new Button("Slow Loris Attack");
 				
 					//CREATING TEXT FIELDS
-						//Create textfield for foreign IP
+						//foreign IP
 							TextField FIP = new TextField();
 							FIP.setText("Input IP or URL here");
 							String FIPtext = FIP.getText();
-						//Create textfield for number of threads allowed
+						//number of threads allowed
 							TextField threadsAllowed = new TextField();
 							threadsAllowed.setText("0");
-						//create textfield for port number
+							//create vbox for threads and thread label
+								VBox VBoxThreads = new VBox();
+								VBoxThreads.setSpacing(8);
+								ObservableList VBoxThreadsList = VBoxThreads.getChildren();
+								VBoxThreadsList.addAll(threadLabel, threadsAllowed);
+						//port number
 							TextField portSpecified = new TextField();
 							portSpecified.setText("80");
-						//create text field for the time allowed to attack	
+							//create vbox for port number and label
+								VBox VBoxPort = new VBox();
+								VBoxPort.setSpacing(8);
+								ObservableList VBoxPortList = VBoxThreads.getChildren();
+								VBoxPortList.addAll(portLabel, portSpecified);
+						//time allowed to attack	
 							TextField timeAllowed = new TextField();
 							timeAllowed.setText("0");
+							//create vbox for time allowed
+								VBox VBoxTime = new VBox();
+								VBoxTime.setSpacing(8);
+								ObservableList VBoxTimeList = VBoxTime.getChildren();
+								VBoxTimeList.addAll(timeLabel, timeAllowed);
+						//server directory
+							TextField specifiedDirectory = new TextField();
+							specifiedDirectory.setText("~");
 				
 				
 					//OUTPUT TEXT
@@ -137,25 +155,6 @@ public class JFX extends Application{
 				HBoxFTools.setSpacing(10);
 				ObservableList FToolsList = HBoxFTools.getChildren(); //retrieving the observable list of the VBox 
 				FToolsList.addAll(FPortScannerButton, SlowLorisButton);
-				
-				//create vbox for threads and thread label
-				VBox VBoxThreads = new VBox();
-				VBoxThreads.setSpacing(8);
-				ObservableList VBoxThreadsList = VBoxThreads.getChildren();
-				VBoxThreadsList.addAll(threadLabel, threadsAllowed);
-				
-				//create vbox for port number and label
-				VBox VBoxPort = new VBox();
-				VBoxPort.setSpacing(8);
-				ObservableList VBoxPortList = VBoxThreads.getChildren();
-				VBoxPortList.addAll(portLabel, portSpecified);
-				
-				//create vbox for time allowed
-				VBox VBoxTime = new VBox();
-				VBoxTime.setSpacing(8);
-				ObservableList VBoxTimeList = VBoxTime.getChildren();
-				VBoxTimeList.addAll(timeLabel, timeAllowed);
-				
 				
 				
 				//create hbox for labels
