@@ -29,7 +29,7 @@ public class Runner{
 	public static void testHttpServer()
 	{
 		
-		BasicHttpServerExample.main(args);
+		//BasicHttpServerExample.main(args);
 	}
 
 	

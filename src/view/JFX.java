@@ -53,107 +53,81 @@ public class JFX extends Application{
 	@Override
 	public void start(Stage primaryStage)
 	{
+
 		
 		//Creates the Pane for the GUI
 				StackPane pane = new StackPane();
-				
-				
-				
-				
-				//Create texts and clear button
-				Text outputText = new Text();
-				outputText.setText("JaVuls");
-				Button clearButton = new Button("Clear Text");
-				
+
 				
 				//Create labels
-				Label localInformation = new Label("Local Information Gathering");
-				Label FInformation = new Label("Foreign IP Scanning Tools");
-				Label threadLabel = new Label("Number of threads");
-				Label portLabel = new Label("Port to attack");
-				Label timeLabel = new Label("Time for attack");
-				Label windowsToolsLabel = new Label("Windows Tools");
-				Label linuxToolsLabel = new Label("Linux Tools");
+					Label localInformation = new Label("Local Information Gathering");
+					Label FInformation = new Label("Foreign IP Scanning Tools");
+					Label threadLabel = new Label("Number of threads");
+					Label portLabel = new Label("Port to attack");
+					Label timeLabel = new Label("Time for attack");
+					Label windowsToolsLabel = new Label("Windows Tools");
+					Label linuxToolsLabel = new Label("Linux Tools");
 				
 				//Strings needed to make life easier
 				String newLine = "\n";
 				
 				
 				
-				
-				
-				
-				
-				
-				//Add image view for animations
-				ImageView statusImage = new ImageView();
-					//add heigh and width of image view
-					statusImage.setFitHeight(200); 
-					statusImage.setFitWidth(200); 
-			      
-					//Setting the preserve ratio of the image view 
-					statusImage.setPreserveRatio(true);
+					//ADD IMAGE FOR VIEW
+						ImageView statusImage = new ImageView();
+						//add height and width of image view
+							statusImage.setFitHeight(200); 
+							statusImage.setFitWidth(200); 
+						//Setting the preserve ratio of the image view 
+							statusImage.setPreserveRatio(true);
+						//set the default image
+							Image defaultImage = new Image("jparkhack2.gif");
+							Image hackerImageJPark = new Image("jparkhack.gif");
+							Image hackerImageCat = new Image("catHacker.gif");
+							Image hackerImageCat2 = new Image("cat2.gif");
+							statusImage.setImage(defaultImage);
 				
 					
-				//set the default image
-					Image defaultImage = new Image("jparkhack2.gif");
-					Image hackerImageJPark = new Image("jparkhack.gif");
-					Image hackerImageCat = new Image("catHacker.gif");
-					Image hackerImageCat2 = new Image("cat2.gif");
-					statusImage.setImage(defaultImage);
+					//CREATING BUTTONS
+						//Create texts and clear button
+							Text outputText = new Text();
+							outputText.setText("JaVuls");
+							Button clearButton = new Button("Clear Text");
+						//create buttons for local machine
+							Button localOSButton = new Button("System OS");
+							Button localInfoButton = new Button("System Information");
+							Button localIPButton = new Button("Check Local IP");
+							Button publicIPButton = new Button("Check Public IP");
+							Button localArchButton = new Button("System Architecture");
+							Button localPortScannerButton = new Button("Local Port Scanner");
+							Button localARPButton = new Button("Local ARP Scan");
+							Button localConsoleButton = new Button("Open Console");
+							Button localFileExplorerButton = new Button("File Expolorer");
+						//create buttons for foreign machines
+							Button FPortScannerButton = new Button("IP Port Scanner");
+							Button SlowLorisButton = new Button("Slow Loris Attack");
 				
-
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-				//create buttons for local machine
-				Button localOSButton = new Button("System OS");
-				Button localInfoButton = new Button("System Information");
-				Button localIPButton = new Button("Check Local IP");
-				Button publicIPButton = new Button("Check Public IP");
-				Button localArchButton = new Button("System Architecture");
-				Button localPortScannerButton = new Button("Local Port Scanner");
-				Button localARPButton = new Button("Local ARP Scan");
-				Button localConsoleButton = new Button("Open Console");
-				Button localFileExplorerButton = new Button("File Expolorer");
-				
-				//Create textfield for foreign IP
-				TextField FIP = new TextField();
-				FIP.setText("Input IP or URL here");
-
-				String FIPtext = FIP.getText();
-				
-				
-				//Create textfield for number of threads allowed
-				TextField threadsAllowed = new TextField();
-				threadsAllowed.setText("0");
-				
-				//create textfield for port number
-				TextField portSpecified = new TextField();
-				portSpecified.setText("80");
-				
-				//create text field for the time allowed to attack
-				
-				TextField timeAllowed = new TextField();
-				timeAllowed.setText("0");
-				
-				//create buttons for foreign machines
-				Button FPortScannerButton = new Button("IP Port Scanner");
-				Button SlowLorisButton = new Button("Slow Loris Attack");
+					//CREATING TEXT FIELDS
+						//Create textfield for foreign IP
+							TextField FIP = new TextField();
+							FIP.setText("Input IP or URL here");
+							String FIPtext = FIP.getText();
+						//Create textfield for number of threads allowed
+							TextField threadsAllowed = new TextField();
+							threadsAllowed.setText("0");
+						//create textfield for port number
+							TextField portSpecified = new TextField();
+							portSpecified.setText("80");
+						//create text field for the time allowed to attack	
+							TextField timeAllowed = new TextField();
+							timeAllowed.setText("0");
 				
 				
-				
-				//Create a scrollable view for output text
-				final ScrollPane textScroll = new ScrollPane();
-				textScroll.setPrefSize(512, 360);
-				textScroll.setContent(outputText);
+					//OUTPUT TEXT
+						//Make scrollable text field
+							final ScrollPane textScroll = new ScrollPane();
+							textScroll.setPrefSize(512, 360);
+							textScroll.setContent(outputText);
 				
 				
 				
@@ -184,35 +158,11 @@ public class JFX extends Application{
 				
 				
 				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
 				//create hbox for labels
 				HBox HBoxFToolsLabels = new HBox();
 				HBoxFToolsLabels.setSpacing(5);
 				ObservableList FToolsLabelList = HBoxFToolsLabels.getChildren();
 				FToolsLabelList.addAll(VBoxThreads,VBoxTime, VBoxPort, statusImage);
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
 				
 				
 				
@@ -436,10 +386,6 @@ public class JFX extends Application{
 				});
 				
 				
-				
-				
-		
-		
 	
 	
 	
@@ -449,31 +395,7 @@ public class JFX extends Application{
 	
 	
 	
-	/*
-	Runnable task2 = new Runnable() {
-		@Override
-		public void run() {
-			StringBuilder str = new StringBuilder("Open Ports on " + FIPTextInString + ":");
-			
-			for( int current = 78; current <= 81; current++ ) {
-				try {
-					Socket s = new Socket();
-					s.connect( new InetSocketAddress( FIPTextInString, current )); //attempt a connection
-					s.close();
-					
-					//System.out.println(( "Open port: " + current + System.lineSeparator() ));
-					str.append(current + System.lineSeparator());
-				}
-				catch( IOException ioe ) { //connection failed
-					System.out.println("connection failed");
-					}
-				}
-			
-			String stringFinal = str.toString();
-			
-		}
-};
-	*/
+	
 	
 	
 	public static void main(String[] args)
@@ -522,5 +444,29 @@ class MyRunnable implements Runnable {
 // }
 // }
 */
-
+/*
+Runnable task2 = new Runnable() {
+	@Override
+	public void run() {
+		StringBuilder str = new StringBuilder("Open Ports on " + FIPTextInString + ":");
+		
+		for( int current = 78; current <= 81; current++ ) {
+			try {
+				Socket s = new Socket();
+				s.connect( new InetSocketAddress( FIPTextInString, current )); //attempt a connection
+				s.close();
+				
+				//System.out.println(( "Open port: " + current + System.lineSeparator() ));
+				str.append(current + System.lineSeparator());
+			}
+			catch( IOException ioe ) { //connection failed
+				System.out.println("connection failed");
+				}
+			}
+		
+		String stringFinal = str.toString();
+		
+	}
+};
+*/
 
