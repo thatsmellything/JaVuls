@@ -135,7 +135,7 @@ public class JFX extends Application{
 								ObservableList VBoxThreadsList = VBoxThreads.getChildren();
 								VBoxThreadsList.addAll(threadLabel, threadsAllowed);
 						//port number
-							Label portLabel = new Label("Port to attack");
+							Label portLabel = new Label("Port to attack/host");
 							TextField portSpecified = new TextField();
 							portSpecified.setText("80");
 							//create vbox for port number and label
@@ -154,13 +154,13 @@ public class JFX extends Application{
 								VBoxTimeList.addAll(timeLabel, timeAllowed);
 						//server directory
 							Label serverDirectoryLabel = new Label("Server Directory");
-							TextField specifiedDirectory = new TextField();
-							specifiedDirectory.setText("~");
+							TextField directorySpecified = new TextField();
+							directorySpecified.setText("C:\\Users");
 							//create vbox for server directory
 								VBox VBoxServerDirectory = new VBox();
 								VBoxServerDirectory.setSpacing(8);
 								ObservableList VBoxServerDirectoryList = VBoxServerDirectory.getChildren();
-								VBoxServerDirectoryList.addAll(serverDirectoryLabel, specifiedDirectory);
+								VBoxServerDirectoryList.addAll(serverDirectoryLabel, directorySpecified);
 				
 							
 							
@@ -241,8 +241,8 @@ public class JFX extends Application{
 				//create listeners for buttons
 				StartHTTPServerButton.setOnAction(new EventHandler<ActionEvent>() {
 				    @Override public void handle(ActionEvent e) {
-				    	testFiles.HTTPServer.main(new String[] {"server", "8000"});
-				    	
+				    	//testFiles.HTTPServer.main(new String[] {directorySpecified.getText(), portSpecified.getText()});
+				    	applications.HTTPServer.startServerUpInGUI(directorySpecified.getText(), portSpecified.getText());
 				    }
 				});
 				

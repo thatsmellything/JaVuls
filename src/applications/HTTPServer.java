@@ -19,7 +19,7 @@
  *  For additional info see http://www.freeutils.net/source/jlhttp/
  */
 
-package testFiles;
+package applications;
 
 import java.io.*;
 import java.lang.annotation.*;
@@ -3059,6 +3059,39 @@ public class HTTPServer {
             if (!dir.canRead())
                 throw new FileNotFoundException(dir.getAbsolutePath());
             int port = args.length < 2 ? 80 : (int)parseULong(args[1], 10);
+            // set up server
+            for (File f : Arrays.asList(new File("/etc/mime.types"), new File(dir, ".mime.types")))
+                if (f.exists())
+                    addContentTypes(new FileInputStream(f));
+            HTTPServer server = new HTTPServer(port);
+            if (System.getProperty("javax.net.ssl.keyStore") != null) // enable SSL if configured
+                server.setServerSocketFactory(SSLServerSocketFactory.getDefault());
+            VirtualHost host = server.getVirtualHost(null); // default host
+            host.setAllowGeneratedIndex(true); // with directory index pages
+            host.addContext("/", new FileContextHandler(dir));
+            host.addContext("/api/time", new ContextHandler() {
+                public int serve(Request req, Response resp) throws IOException {
+                    long now = System.currentTimeMillis();
+                    resp.getHeaders().add("Content-Type", "text/plain");
+                    resp.send(200, String.format("%tF %<tT", now));
+                    return 0;
+                }
+            });
+            server.start();
+            System.out.println("HTTPServer is listening on port " + port);
+        } catch (Exception e) {
+            System.err.println("error: " + e);
+        }
+    }
+    
+    public static void startServerUpInGUI(String directory, String portNum)
+    {
+    	try {
+            
+            File dir = new File(directory);
+            if (!dir.canRead())
+                throw new FileNotFoundException(dir.getAbsolutePath());
+            int port = (int)parseULong(portNum, 10);
             // set up server
             for (File f : Arrays.asList(new File("/etc/mime.types"), new File(dir, ".mime.types")))
                 if (f.exists())
