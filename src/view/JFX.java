@@ -157,12 +157,17 @@ public class JFX extends Application{
 							Label serverDirectoryLabel = new Label("Server Directory");
 							TextField directorySpecified = new TextField();
 							directorySpecified.setText("C:\\Users");
-							//create vbox for server directory
+							//Create vbox for server directory
 								VBox VBoxServerDirectory = new VBox();
 								VBoxServerDirectory.setSpacing(8);
 								ObservableList VBoxServerDirectoryList = VBoxServerDirectory.getChildren();
 								VBoxServerDirectoryList.addAll(serverDirectoryLabel, directorySpecified);
-				
+								
+							//Create new VBOX for server button and server status indicator
+								VBox ServerButtonAndStatus = new VBox();
+								ServerButtonAndStatus.setSpacing(7);
+								ObservableList ServerToolsList = ServerButtonAndStatus.getChildren();
+								ServerToolsList.addAll(StartHTTPServerButton, ServerStatusLabel);
 							
 							
 							
@@ -177,11 +182,7 @@ public class JFX extends Application{
 							textScroll.setPrefSize(512, 360);
 							textScroll.setContent(outputText);
 				
-				//Create new VBOX for server button and server status indicator
-				VBox ServerButtonAndStatus = new VBox();
-				ServerButtonAndStatus.setSpacing(7);
-				ObservableList ServerToolsList = ServerButtonAndStatus.getChildren();
-				ServerToolsList.addAll(StartHTTPServerButton, ServerStatusLabel);
+				
 				
 				//Create new HBOX for forgein tools underneath ip addresss bar
 				HBox HBoxFTools = new HBox();
@@ -245,22 +246,24 @@ public class JFX extends Application{
 				
 				//create listeners for buttons
 				StartHTTPServerButton.setOnAction(new EventHandler<ActionEvent>() {
-				    @Override public void handle(ActionEvent e) {
-				    	//testFiles.HTTPServer.main(new String[] {directorySpecified.getText(), portSpecified.getText()});
-				    	
-				    	
+				    @Override public void handle(ActionEvent e) {				    	
 				    	if(ServerStatusLabel.getText().equals("Server Status: Off"))
 				    	{
 				    	
 				    	applications.HTTPServer.startServerUpInGUI(directorySpecified.getText(), portSpecified.getText());
 				    	ServerStatusLabel.setText("Server Status: On");
+				    	try {
+							outputText.setText(outputText.getText()  + newLine + "HTTP Server Started At:" + newLine + "http://" + YourIPLookup.viewMyIP() + ":" + portSpecified.getText() );
+						} catch (UnknownHostException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} 
 				    	}
 				    	else
 				    	{
-				    		
-					    	//applications.HTTPServer.stop();
 				    		applications.HTTPServer.stop();
 				    		ServerStatusLabel.setText("Server Status: Off");
+				    		outputText.setText(outputText.getText()  + newLine + "HTTP Server Stopped");
 				    	}
 				    	
 				    }
@@ -392,25 +395,7 @@ public class JFX extends Application{
 				});
 				
 				FPortScannerButton.setOnAction(new EventHandler<ActionEvent>() {
-					
-				    @Override public void handle(ActionEvent e) {
-				    	/*
-				    	outputText.setText(outputText.getText());
-				    	int threads = Integer.parseInt(threadsAllowed.getText());
-				    	ExecutorService ex = Executors.newFixedThreadPool(threads);
-				    	
-				    	Thread t = new Thread(new MyRunnable(FIP.getText()));
-				    	t.start();
-						//ex.submit(task2);
-				    	
-				    	
-				    	
-				    	
-					    outputText.setText(outputText.getText() + newLine + WebIPPortScanner.WebIPPortScannerTest(FIP.getText()));
-					    t.stop();
-					    }
-					    */
-					
+				    @Override public void handle(ActionEvent e) {					
 				    	statusImage.setImage(hackerImageJPark);
 				    	JOptionPane.showMessageDialog(null, "THIS TOOL IS ONLY TO BE USED ON MACHINES AND APPLICATIONS WITH PERMISSION! Port scanning can be noisey");
 					outputText.setText(outputText.getText());
@@ -441,17 +426,27 @@ public class JFX extends Application{
 				});
 				
 				
-	
-	
-	
+				//THIS TRIGGERS WHEN USER CLOSES THE APP
+				
+				primaryStage.setOnCloseRequest(event -> {
+					applications.HTTPServer.stop();
+					outputText.setText(outputText.getText()  + newLine + "HTTP Server Stopped" + newLine + "Shuting Down Application");
+				    System.out.println("Stage is closing");
+				    // Save file
+				});
+
 	
 	}
 	
 	
 	
+	/*
 	
-	
-	
+	public static void printMe(String thingToPrint)
+	{
+		outputText.setText(outputText.getText() + thingToPrint);
+	}
+	*/
 	
 	public static void main(String[] args)
 	{
