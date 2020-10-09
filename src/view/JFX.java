@@ -98,6 +98,7 @@ public class JFX extends Application{
 						//create buttons for foreign machines
 							Button FPortScannerButton = new Button("IP Port Scanner");
 							Button SlowLorisButton = new Button("Slow Loris Attack");
+							Button StartHTTPServerButton = new Button("Start HTTP Server");
 				
 							
 							
@@ -182,7 +183,7 @@ public class JFX extends Application{
 				HBox HBoxFTools = new HBox();
 				HBoxFTools.setSpacing(10);
 				ObservableList FToolsList = HBoxFTools.getChildren(); //retrieving the observable list of the VBox 
-				FToolsList.addAll(FPortScannerButton, SlowLorisButton);
+				FToolsList.addAll(FPortScannerButton, SlowLorisButton, StartHTTPServerButton);
 				
 				
 				//create hbox for labels
@@ -238,6 +239,13 @@ public class JFX extends Application{
 		
 				
 				//create listeners for buttons
+				StartHTTPServerButton.setOnAction(new EventHandler<ActionEvent>() {
+				    @Override public void handle(ActionEvent e) {
+				    	testFiles.HTTPServer.main(new String[] {"server", "8000"});
+				    	
+				    }
+				});
+				
 				clearButton.setOnAction(new EventHandler<ActionEvent>() {
 				    @Override public void handle(ActionEvent e) {
 				    	
