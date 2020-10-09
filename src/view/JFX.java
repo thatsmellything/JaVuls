@@ -98,7 +98,7 @@ public class JFX extends Application{
 						//create buttons for foreign machines
 							Button FPortScannerButton = new Button("IP Port Scanner");
 							Button SlowLorisButton = new Button("Slow Loris Attack");
-							Button StartHTTPServerButton = new Button("Start HTTP Server");
+							Button StartHTTPServerButton = new Button("Start/Stop HTTP Server");
 				
 							
 							
@@ -112,6 +112,7 @@ public class JFX extends Application{
 							Label FInformation = new Label("Foreign IP Scanning Tools");
 							Label windowsToolsLabel = new Label("Windows Tools");
 							Label linuxToolsLabel = new Label("Linux Tools");
+							Label ServerStatusLabel = new Label("Server Status: Off");
 						
 							
 							
@@ -137,7 +138,7 @@ public class JFX extends Application{
 						//port number
 							Label portLabel = new Label("Port to attack/host");
 							TextField portSpecified = new TextField();
-							portSpecified.setText("80");
+							portSpecified.setText("8000");
 							//create vbox for port number and label
 								VBox VBoxPort = new VBox();
 								VBoxPort.setSpacing(8);
@@ -176,14 +177,17 @@ public class JFX extends Application{
 							textScroll.setPrefSize(512, 360);
 							textScroll.setContent(outputText);
 				
-				
-				
+				//Create new VBOX for server button and server status indicator
+				VBox ServerButtonAndStatus = new VBox();
+				ServerButtonAndStatus.setSpacing(7);
+				ObservableList ServerToolsList = ServerButtonAndStatus.getChildren();
+				ServerToolsList.addAll(StartHTTPServerButton, ServerStatusLabel);
 				
 				//Create new HBOX for forgein tools underneath ip addresss bar
 				HBox HBoxFTools = new HBox();
 				HBoxFTools.setSpacing(10);
 				ObservableList FToolsList = HBoxFTools.getChildren(); //retrieving the observable list of the VBox 
-				FToolsList.addAll(FPortScannerButton, SlowLorisButton, StartHTTPServerButton);
+				FToolsList.addAll(FPortScannerButton, SlowLorisButton, ServerButtonAndStatus);
 				
 				
 				//create hbox for labels
@@ -238,11 +242,27 @@ public class JFX extends Application{
 				primaryStage.show();
 		
 				
+				
 				//create listeners for buttons
 				StartHTTPServerButton.setOnAction(new EventHandler<ActionEvent>() {
 				    @Override public void handle(ActionEvent e) {
 				    	//testFiles.HTTPServer.main(new String[] {directorySpecified.getText(), portSpecified.getText()});
+				    	
+				    	
+				    	if(ServerStatusLabel.getText().equals("Server Status: Off"))
+				    	{
+				    	
 				    	applications.HTTPServer.startServerUpInGUI(directorySpecified.getText(), portSpecified.getText());
+				    	ServerStatusLabel.setText("Server Status: On");
+				    	}
+				    	else
+				    	{
+				    		
+					    	//applications.HTTPServer.stop();
+				    		applications.HTTPServer.stop();
+				    		ServerStatusLabel.setText("Server Status: Off");
+				    	}
+				    	
 				    }
 				});
 				

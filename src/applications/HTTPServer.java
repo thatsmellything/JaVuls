@@ -1904,7 +1904,7 @@ public class HTTPServer {
     protected volatile ServerSocketFactory serverSocketFactory;
     protected volatile boolean secure;
     protected volatile Executor executor;
-    protected volatile ServerSocket serv;
+    protected volatile static ServerSocket serv;
     protected final Map<String, VirtualHost> hosts = new ConcurrentHashMap<String, VirtualHost>();
 
     /**
@@ -2044,10 +2044,24 @@ public class HTTPServer {
     }
 
     /**
+     * Checks if the server is running and sends a string back saying running or not running
+     */
+    
+    public static void IsServerRunning()
+    {
+    	try {
+            if (serv != null)
+                serv.close();
+        } catch (IOException ignore) {}
+        serv = null;
+        
+    }
+    
+    /**
      * Stops this server. If it is already stopped, does nothing.
      * Note that if an {@link #setExecutor Executor} was set, it must be closed separately.
      */
-    public synchronized void stop() {
+    public synchronized static void stop() {
         try {
             if (serv != null)
                 serv.close();
