@@ -107,9 +107,13 @@ public class BruteCrack
 			start = System.nanoTime();
 			answer = bc.crack(testword);
 			end = System.nanoTime();
+			
+			long timeTogether = (end - start)/1000000000;
 		
 			System.out.println("Answer: " + answer);
 			System.out.println("Processing Time: " + ((end - start)/1000000000));
+			String time = Long.toString(timeTogether);
+			hashcracked(answer, time);
 			return answer;
 		}
 		catch(Exception e)
@@ -117,6 +121,12 @@ public class BruteCrack
 			System.out.println("Exception: " + e.toString());
 			return "somethingfailed";
 		}
+	}
+	
+	public static String hashcracked(String answer, String time)
+	{
+		String returnMe = ("Answer: " + answer + "\n" + "Processing Time: " + time);
+		return  returnMe;
 	}
 	
 	public static void main(String args[])
