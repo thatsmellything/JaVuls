@@ -440,13 +440,7 @@ public class JFX extends Application{
 	
 	
 	
-	/*
-	
-	public static void printMe(String thingToPrint)
-	{
-		outputText.setText(outputText.getText() + thingToPrint);
-	}
-	*/
+
 	
 	public static void main(String[] args)
 	{
@@ -455,7 +449,13 @@ public class JFX extends Application{
 
 }
 
+/*
 
+public static void printMe(String thingToPrint)
+{
+	outputText.setText(outputText.getText() + thingToPrint);
+}
+*/
 
 /*
 
