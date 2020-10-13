@@ -17,7 +17,6 @@ import javax.swing.JOptionPane;
 import applications.PublicIPLookupHost;
 import applications.PortScanner;
 import applications.ShowProperties;
-import applications.SlowLoris;
 import applications.WindowsCommandLineIPandPing;
 import applications.YourIPLookup;
 import javafx.application.Application;
@@ -42,7 +41,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
-import testFiles.OpenCommandPrompt;
 import testFiles.*;
 
 
