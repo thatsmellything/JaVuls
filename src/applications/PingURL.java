@@ -14,14 +14,15 @@ public class PingURL {
 	//String url = "http://judkinscustomtaxidermy.com";
     
     
-    InetAddress address = InetAddress.getByName(new URL(url).getHost());
-    String ip = address.getHostAddress();
-    System.out.println(ip);
-	
-	HttpURLConnection connection = null;
+		HttpURLConnection connection = null;
 
     try {
 
+    	InetAddress address = InetAddress.getByName(new URL(url).getHost());
+        String ip = address.getHostAddress();
+        System.out.println(ip);
+    	
+    	
         URL u = new URL(url);
         connection = (HttpURLConnection) u.openConnection();
         connection.setRequestMethod("HEAD");
@@ -39,14 +40,17 @@ public class PingURL {
     } catch (MalformedURLException e) {
 
         // TODO Auto-generated catch block
-
+    	
         e.printStackTrace();
+        return "Connection has failed to " + url + "\n" + "MalformedURLException Error";
 
     } catch (IOException e) {
 
         // TODO Auto-generated catch block
 
         e.printStackTrace();
+        
+        return "Connection has failed to " + url + "\n" + "IOException Error";
 
     } finally {
 
@@ -58,7 +62,7 @@ public class PingURL {
 
     }
     
-    return "Connection has failed to " + url;
+    
 	}
 
 	
