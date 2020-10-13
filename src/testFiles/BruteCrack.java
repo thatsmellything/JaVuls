@@ -47,7 +47,7 @@ public class BruteCrack
 				md.reset();
 				md.update(new String(guess).getBytes());
 				guess_hash = hashToString(md.digest());
-				System.out.println(guess_hash);
+				//System.out.println(guess_hash);
 				if(hash.equals(guess_hash))
 				{
 					done = true;

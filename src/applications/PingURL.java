@@ -41,14 +41,14 @@ public class PingURL {
 
         // TODO Auto-generated catch block
     	
-        e.printStackTrace();
+       // e.printStackTrace();
         return "Connection has failed to " + url + "\n" + "MalformedURLException Error";
 
     } catch (IOException e) {
 
         // TODO Auto-generated catch block
 
-        e.printStackTrace();
+       // e.printStackTrace();
         
         return "Connection has failed to " + url + "\n" + "IOException Error";
 

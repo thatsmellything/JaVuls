@@ -117,7 +117,7 @@ public class JFX extends Application{
 							Label windowsToolsLabel = new Label("Windows Tools");
 							Label linuxToolsLabel = new Label("Linux Tools");
 							Label ServerStatusLabel = new Label("Server Status: Off");
-						
+							Label BruteForceStatusLabel = new Label("Cracking Status: Off");
 							
 							
 							
@@ -172,7 +172,12 @@ public class JFX extends Application{
 								ServerButtonAndStatus.setSpacing(7);
 								ObservableList ServerToolsList = ServerButtonAndStatus.getChildren();
 								ServerToolsList.addAll(StartHTTPServerButton, ServerStatusLabel);
-							
+						//VBox for brute force Status and button
+						VBox VBoxCracker = new VBox();
+						VBoxCracker.setSpacing(8);
+						ObservableList VBoxCrackerList = VBoxCracker.getChildren();
+						VBoxCrackerList.addAll(MD5CrackButton, BruteForceStatusLabel);
+						
 							
 							
 							
@@ -192,7 +197,7 @@ public class JFX extends Application{
 				HBox HBoxFTools = new HBox();
 				HBoxFTools.setSpacing(10);
 				ObservableList FToolsList = HBoxFTools.getChildren(); //retrieving the observable list of the VBox 
-				FToolsList.addAll(FPortScannerButton, SlowLorisButton, ServerButtonAndStatus, MD5CrackButton, PingURLButton);
+				FToolsList.addAll(FPortScannerButton, SlowLorisButton, ServerButtonAndStatus, VBoxCracker, PingURLButton);
 				
 				
 				//create hbox for labels
@@ -281,18 +286,38 @@ public class JFX extends Application{
 				    }
 				});
 				
+				
+				
 				MD5CrackButton.setOnAction(new EventHandler<ActionEvent>() {
 				    @Override public void handle(ActionEvent e) {
+				    	
 				    	Thread bustThatCode = new Thread(new Runnable() {
 							public void run() {
-								String crackboi = BruteCrack.test(MasterTextEntryBox.getText());
+								if(BruteForceStatusLabel.getText().equals("Cracking Status: Off"))
+						    	{
+						    		outputText.setText(outputText.getText()  + newLine + "Brute force service started");
+						    		BruteForceStatusLabel.setText("Cracking Status: Running");
+									String crackboi = BruteCrack.test(MasterTextEntryBox.getText());
+						    	
+						    	
+						    	//outputText.setText(outputText.getText() + crackboi);
+						    }
+						    	else
+						    	{
+						    		BruteForceStatusLabel.setText("Cracking Status: Off");
+						    	//	bustThatCode.stop();
+						    	}
+								
 							}
 						});
-				    	bustThatCode.start();
+			    		bustThatCode.start();
+			    		
+			    		
 				    	
-				    	//outputText.setText(outputText.getText() + crackboi);
+				    	
 				    }
 				});
+				
 				
 				localOSButton.setOnAction(new EventHandler<ActionEvent>() {
 				    @Override public void handle(ActionEvent e) {
@@ -301,8 +326,7 @@ public class JFX extends Application{
 				        outputText.setText(outputText.getText()  + newLine + ShowProperties.getOperatingSystem() + newLine);
 				    }
 				});
-		
-				
+					
 				localInfoButton.setOnAction(new EventHandler<ActionEvent>() {
 				    @Override public void handle(ActionEvent e) {
 				    	outputText.setText(outputText.getText());
@@ -375,9 +399,7 @@ public class JFX extends Application{
 				        
 				    }
 				});
-				
-				
-				
+						
 				localConsoleButton.setOnAction(new EventHandler<ActionEvent>() {
 				    @Override public void handle(ActionEvent e) {
 				    	
@@ -448,7 +470,7 @@ public class JFX extends Application{
 					
 						try {
 							//PingURL.PingURL(FIP.getText());
-							outputText.setText(PingURL.PingURL(MasterTextEntryBox.getText()));
+							outputText.setText(outputText.getText() + PingURL.PingURL(MasterTextEntryBox.getText()));
 						} catch (UnknownHostException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
@@ -459,7 +481,6 @@ public class JFX extends Application{
 					
 				    }
 				});
-				
 				
 				SlowLorisButton.setOnAction(new EventHandler<ActionEvent>() {
 				    @Override public void handle(ActionEvent e) {

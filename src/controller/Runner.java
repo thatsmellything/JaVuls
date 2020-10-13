@@ -18,13 +18,8 @@ public class Runner{
 				app.main(args);
 			}
 		});
-		//startGUI.start();
-		PingURL.PingURL("http://google.com");
+		startGUI.start();
 		
-		
-		//int unboundedRandomValue = ThreadLocalRandom.current().nextInt();
-		//System.out.println(unboundedRandomValue);
-		//testBruteForce();
 		
 		//JFX app = new JFX();
 		//app.main(args);
