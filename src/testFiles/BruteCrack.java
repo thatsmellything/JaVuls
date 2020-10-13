@@ -2,6 +2,8 @@ package testFiles;
 
 import java.security.MessageDigest;
 
+import javax.swing.JOptionPane;
+
 public class BruteCrack
 {
 	MessageDigest md;
@@ -113,7 +115,7 @@ public class BruteCrack
 			System.out.println("Answer: " + answer);
 			System.out.println("Processing Time: " + ((end - start)/1000000000));
 			String time = Long.toString(timeTogether);
-			hashcracked(answer, time);
+			JOptionPane.showMessageDialog(null, hashcracked(answer, time));
 			return answer;
 		}
 		catch(Exception e)
@@ -126,6 +128,7 @@ public class BruteCrack
 	public static String hashcracked(String answer, String time)
 	{
 		String returnMe = ("Answer: " + answer + "\n" + "Processing Time: " + time);
+		
 		return  returnMe;
 	}
 	

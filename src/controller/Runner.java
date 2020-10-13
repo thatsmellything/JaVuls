@@ -1,13 +1,16 @@
 package controller;
 
 
+import java.io.IOException;
+import java.net.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 import testFiles.*;
 import view.*;
+import applications.*;
 
 public class Runner{
-	public static void main(String[] args)
+	public static void main(String[] args) throws UnknownHostException, MalformedURLException
 	{
 		Thread startGUI = new Thread(new Runnable() {
 			public void run() {
@@ -15,8 +18,8 @@ public class Runner{
 				app.main(args);
 			}
 		});
-		System.out.println("How far will it copy?");
-		startGUI.start();
+		//startGUI.start();
+		PingURL.PingURL("http://google.com");
 		
 		
 		//int unboundedRandomValue = ThreadLocalRandom.current().nextInt();
@@ -43,64 +46,62 @@ public class Runner{
 			}
 		});
 		test1.start();
-		Thread test2 = new Thread(new Runnable() {
-			public void run() {
-				String stringlad =  "900150983CD24FB0D6963F7D28E17F72";
-				String crackboi = BruteCrack.test(stringlad);
-				System.out.println(crackboi);
-			}
-		});
-		test2.start();
-		Thread test3 = new Thread(new Runnable() {
-			public void run() {
-				String stringlad =  "900150983CD24FB0D6963F7D28E17F72";
-				String crackboi = BruteCrack.test(stringlad);
-				System.out.println(crackboi);
-			}
-		});
-		test3.start();
-		Thread test4 = new Thread(new Runnable() {
-			public void run() {
-				String stringlad =  "900150983CD24FB0D6963F7D28E17F72";
-				String crackboi = BruteCrack.test(stringlad);
-				System.out.println(crackboi);
-			}
-		});
-		test4.start();
-		Thread test5 = new Thread(new Runnable() {
-			public void run() {
-				String stringlad =  "900150983CD24FB0D6963F7D28E17F72";
-				String crackboi = BruteCrack.test(stringlad);
-				System.out.println(crackboi);
-			}
-		});
-		test5.start();
-		Thread test6 = new Thread(new Runnable() {
-			public void run() {
-				String stringlad =  "900150983CD24FB0D6963F7D28E17F72";
-				String crackboi = BruteCrack.test(stringlad);
-				System.out.println(crackboi);
-			}
-		});
-		test6.start();
-		Thread test7 = new Thread(new Runnable() {
-			public void run() {
-				String stringlad =  "900150983CD24FB0D6963F7D28E17F72";
-				String crackboi = BruteCrack.test(stringlad);
-				System.out.println(crackboi);
-			}
-		});
-		test7.start();
-
-		
-		
-		
-		
 	}
 	public static void testHttpServer()
 	{
 		
 		//BasicHttpServerExample.main(args);
+	}
+	public static void testPing() throws UnknownHostException, MalformedURLException
+	{
+		
+		String url = "http://judkinscustomtaxidermy.com";
+        
+        
+        InetAddress address = InetAddress.getByName(new URL(url).getHost());
+        String ip = address.getHostAddress();
+        System.out.println(ip);
+		
+		HttpURLConnection connection = null;
+
+	    try {
+
+	        URL u = new URL("http://www.google.com/");
+	        
+
+	        connection = (HttpURLConnection) u.openConnection();
+
+	        connection.setRequestMethod("HEAD");
+
+	        int code = connection.getResponseCode();
+	        System.out.println(connection.getURL());
+	        System.out.println(connection.getRequestProperties());
+
+	        System.out.println("" + code);
+
+	        // You can determine on HTTP return code received. 200 is success.
+
+	    } catch (MalformedURLException e) {
+
+	        // TODO Auto-generated catch block
+
+	        e.printStackTrace();
+
+	    } catch (IOException e) {
+
+	        // TODO Auto-generated catch block
+
+	        e.printStackTrace();
+
+	    } finally {
+
+	        if (connection != null) {
+
+	            connection.disconnect();
+
+	        }
+
+	    }
 	}
 
 	

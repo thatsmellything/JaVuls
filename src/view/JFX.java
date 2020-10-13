@@ -5,6 +5,7 @@ import java.io.Console;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.InetSocketAddress;
+import java.net.MalformedURLException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.concurrent.ExecutionException;
@@ -15,6 +16,7 @@ import java.util.concurrent.TimeUnit;
 import javax.swing.JOptionPane;
 
 import applications.PublicIPLookupHost;
+import applications.PingURL;
 import applications.PortScanner;
 import applications.ShowProperties;
 import applications.WindowsCommandLineIPandPing;
@@ -96,9 +98,11 @@ public class JFX extends Application{
 						//create buttons for foreign machines
 							Button FPortScannerButton = new Button("IP Port Scanner");
 							Button SlowLorisButton = new Button("Slow Loris Attack");
+							Button PingURLButton = new Button("Ping URL");
 							//set button color as red because it often fails and crashes the program
 							SlowLorisButton.setStyle("-fx-background-color: #ff0000; ");
 							Button StartHTTPServerButton = new Button("Start/Stop HTTP Server");
+							Button MD5CrackButton = new Button("MD5 Cracker");
 				
 							
 							
@@ -123,9 +127,9 @@ public class JFX extends Application{
 							
 					//CREATING TEXT FIELDS AND THEIR VBOX
 						//foreign IP
-							TextField FIP = new TextField();
-							FIP.setText("Input IP or URL here");
-							String FIPtext = FIP.getText();
+							TextField MasterTextEntryBox = new TextField();
+							MasterTextEntryBox.setText("IP/URL/HASH");
+							String FIPtext = MasterTextEntryBox.getText();
 						//number of threads allowed
 							Label threadLabel = new Label("Number of threads");
 							TextField threadsAllowed = new TextField();
@@ -188,7 +192,7 @@ public class JFX extends Application{
 				HBox HBoxFTools = new HBox();
 				HBoxFTools.setSpacing(10);
 				ObservableList FToolsList = HBoxFTools.getChildren(); //retrieving the observable list of the VBox 
-				FToolsList.addAll(FPortScannerButton, SlowLorisButton, ServerButtonAndStatus);
+				FToolsList.addAll(FPortScannerButton, SlowLorisButton, ServerButtonAndStatus, MD5CrackButton, PingURLButton);
 				
 				
 				//create hbox for labels
@@ -203,7 +207,7 @@ public class JFX extends Application{
 				VBox VBoxFSysInfoButtons = new VBox();
 				VBoxFSysInfoButtons.setSpacing(10);//Amount of space inbetween each node in the vbox
 				ObservableList list = VBoxFSysInfoButtons.getChildren(); //retrieving the observable list of the VBox 
-				list.addAll(FInformation, FIP, HBoxFTools, HBoxFToolsLabels);
+				list.addAll(FInformation, MasterTextEntryBox, HBoxFTools, HBoxFToolsLabels);
 				
 				//create VBox for text space and the clear button
 				VBox VBoxTextAndClear = new VBox();
@@ -277,6 +281,19 @@ public class JFX extends Application{
 				    }
 				});
 				
+				MD5CrackButton.setOnAction(new EventHandler<ActionEvent>() {
+				    @Override public void handle(ActionEvent e) {
+				    	Thread bustThatCode = new Thread(new Runnable() {
+							public void run() {
+								String crackboi = BruteCrack.test(MasterTextEntryBox.getText());
+							}
+						});
+				    	bustThatCode.start();
+				    	
+				    	//outputText.setText(outputText.getText() + crackboi);
+				    }
+				});
+				
 				localOSButton.setOnAction(new EventHandler<ActionEvent>() {
 				    @Override public void handle(ActionEvent e) {
 				    	
@@ -333,23 +350,28 @@ public class JFX extends Application{
 				
 				localPortScannerButton.setOnAction(new EventHandler<ActionEvent>() {
 				    @Override public void handle(ActionEvent e) {
+				    	Thread localPortScannerThread = new Thread(new Runnable() {
+							public void run() {
+								statusImage.setImage(hackerImageJPark);
+						    	outputText.setText(outputText.getText());
+						    	outputText.setText(outputText.getText() + "This part of the program functions best when the threads allowed is set to 0. This will let the computer make threads until it no longer needs them and is the optimal way to save memory and still have the best speed. Having too many threads will cause a memory leakage while having too little will cause a slow scan.");
+						        try {
+									outputText.setText(outputText.getText() + newLine + PortScanner.localPortScan(threadsAllowed.getText()) + newLine);
+									Runtime.getRuntime().gc();
+						        } catch (UnknownHostException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								} catch (InterruptedException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								} catch (ExecutionException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+							}
+						});
+				    	localPortScannerThread.start();
 				    	
-				    	statusImage.setImage(hackerImageJPark);
-				    	outputText.setText(outputText.getText());
-				    	outputText.setText(outputText.getText() + "This part of the program functions best when the threads allowed is set to 0. This will let the computer make threads until it no longer needs them and is the optimal way to save memory and still have the best speed. Having too many threads will cause a memory leakage while having too little will cause a slow scan.");
-				        try {
-							outputText.setText(outputText.getText() + newLine + PortScanner.localPortScan(threadsAllowed.getText()) + newLine);
-							Runtime.getRuntime().gc();
-				        } catch (UnknownHostException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						} catch (InterruptedException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						} catch (ExecutionException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
 				        
 				    }
 				});
@@ -395,23 +417,46 @@ public class JFX extends Application{
 				});
 				
 				FPortScannerButton.setOnAction(new EventHandler<ActionEvent>() {
-				    @Override public void handle(ActionEvent e) {					
-				    	statusImage.setImage(hackerImageJPark);
-				    	JOptionPane.showMessageDialog(null, "THIS TOOL IS ONLY TO BE USED ON MACHINES AND APPLICATIONS WITH PERMISSION! Port scanning can be noisey");
-					outputText.setText(outputText.getText());
-			    	outputText.setText(outputText.getText() + "This part of the program functions best when the threads allowed is set to 0. This will let the computer make threads until it no longer needs them and is the optimal way to save memory and still have the best speed. Having too many threads will cause a memory leakage while having too little will cause a slow scan.");
-			        try {
-						outputText.setText(outputText.getText() + newLine + PortScanner.foreignPortScan(FIP.getText(), threadsAllowed.getText()) + newLine);
-					} catch (UnknownHostException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (InterruptedException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (ExecutionException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+				    @Override public void handle(ActionEvent e) {
+				    	Thread bustThatCode = new Thread(new Runnable() {
+							public void run() {
+								statusImage.setImage(hackerImageJPark);
+						    	JOptionPane.showMessageDialog(null, "THIS TOOL IS ONLY TO BE USED ON MACHINES AND APPLICATIONS WITH PERMISSION! Port scanning can be noisey");
+								outputText.setText(outputText.getText());
+						    	outputText.setText(outputText.getText() + "This part of the program functions best when the threads allowed is set to 0. This will let the computer make threads until it no longer needs them and is the optimal way to save memory and still have the best speed. Having too many threads will cause a memory leakage while having too little will cause a slow scan.");
+						        try {
+									outputText.setText(outputText.getText() + newLine + PortScanner.foreignPortScan(MasterTextEntryBox.getText(), threadsAllowed.getText()) + newLine);
+								} catch (UnknownHostException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								} catch (InterruptedException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								} catch (ExecutionException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+							}
+						});
+				    	bustThatCode.start();
+				    	
+				    }
+				});
+				
+				PingURLButton.setOnAction(new EventHandler<ActionEvent>() {
+				    @Override public void handle(ActionEvent e) {
+					
+						try {
+							//PingURL.PingURL(FIP.getText());
+							outputText.setText(PingURL.PingURL(MasterTextEntryBox.getText()));
+						} catch (UnknownHostException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (MalformedURLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					
 				    }
 				});
 				
@@ -420,8 +465,8 @@ public class JFX extends Application{
 				    @Override public void handle(ActionEvent e) {
 				    	outputText.setText(outputText.getText());
 				    	JOptionPane.showMessageDialog(null, "THIS TOOL IS ONLY TO BE USED ON MACHINES AND APPLICATIONS WITH PERMISSION");
-				        outputText.setText(outputText.getText() + "Running slow loris attack on " + FIP.getText() + " on port " + portSpecified.getText() + " with " + threadsAllowed.getText() + " threads for " + timeAllowed.getText() + " time. Please use responsibly and with permission from the owner.");
-				        SlowLoris.slowLorisRun(FIP.getText(), portSpecified.getText(), threadsAllowed.getText(), timeAllowed.getText());
+				        outputText.setText(outputText.getText() + "Running slow loris attack on " + MasterTextEntryBox.getText() + " on port " + portSpecified.getText() + " with " + threadsAllowed.getText() + " threads for " + timeAllowed.getText() + " time. Please use responsibly and with permission from the owner.");
+				        SlowLoris.slowLorisRun(MasterTextEntryBox.getText(), portSpecified.getText(), threadsAllowed.getText(), timeAllowed.getText());
 				    }
 				});
 				
