@@ -11,6 +11,7 @@ import java.net.UnknownHostException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import javax.swing.JOptionPane;
@@ -22,6 +23,7 @@ import applications.ShowProperties;
 import applications.WindowsCommandLineIPandPing;
 import applications.YourIPLookup;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -251,7 +253,30 @@ public class JFX extends Application{
 				//Makes the stage and GUI actually show up on the screen
 				primaryStage.show();
 		
-				
+				//Threads
+					//Thread for brute force
+						Thread bustEm = new Thread(new Runnable() {
+							public void run() {
+								String crackboi = BruteCrack.test(MasterTextEntryBox.getText());
+							}
+						});
+					//Thread to update GUI every 3 seconds
+						Runnable helloRunnable = new Runnable() {
+						    public void run() {
+						        System.out.println("Hello world");
+						        if(bustEm.isAlive())
+						        {
+						        	BruteForceStatusLabel.setText("Cracking Status: Running");
+						        }
+						        else
+						        {
+						        	BruteForceStatusLabel.setText("Cracking Status: Off");
+						        }
+						    }
+						};
+		
+						ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
+						executor.scheduleAtFixedRate(helloRunnable, 0, 3, TimeUnit.SECONDS);
 				
 				//create listeners for buttons
 				StartHTTPServerButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -286,38 +311,25 @@ public class JFX extends Application{
 				    }
 				});
 				
-				
-				
 				MD5CrackButton.setOnAction(new EventHandler<ActionEvent>() {
 				    @Override public void handle(ActionEvent e) {
-				    	
-				    	Thread bustThatCode = new Thread(new Runnable() {
-							public void run() {
 								if(BruteForceStatusLabel.getText().equals("Cracking Status: Off"))
 						    	{
-						    		outputText.setText(outputText.getText()  + newLine + "Brute force service started");
-						    		BruteForceStatusLabel.setText("Cracking Status: Running");
-									String crackboi = BruteCrack.test(MasterTextEntryBox.getText());
-						    	
-						    	
+									outputText.setText(outputText.getText()  + newLine + "Brute force service started");
+									//Platform.runLater(bustEm);
+									bustEm.start();
+									//BruteForceStatusLabel.setText("Cracking Status: Off");
 						    	//outputText.setText(outputText.getText() + crackboi);
 						    }
 						    	else
 						    	{
 						    		BruteForceStatusLabel.setText("Cracking Status: Off");
 						    	//	bustThatCode.stop();
+						    		bustEm.stop();
 						    	}
 								
 							}
-						});
-			    		bustThatCode.start();
-			    		
-			    		
-				    	
-				    	
-				    }
 				});
-				
 				
 				localOSButton.setOnAction(new EventHandler<ActionEvent>() {
 				    @Override public void handle(ActionEvent e) {
@@ -440,7 +452,7 @@ public class JFX extends Application{
 				
 				FPortScannerButton.setOnAction(new EventHandler<ActionEvent>() {
 				    @Override public void handle(ActionEvent e) {
-				    	Thread bustThatCode = new Thread(new Runnable() {
+				    	Thread FPortScannerThread = new Thread(new Runnable() {
 							public void run() {
 								statusImage.setImage(hackerImageJPark);
 						    	JOptionPane.showMessageDialog(null, "THIS TOOL IS ONLY TO BE USED ON MACHINES AND APPLICATIONS WITH PERMISSION! Port scanning can be noisey");
@@ -460,7 +472,7 @@ public class JFX extends Application{
 								}
 							}
 						});
-				    	bustThatCode.start();
+				    	FPortScannerThread.start();
 				    	
 				    }
 				});
