@@ -96,6 +96,8 @@ public class JFX extends Application{
 						//create buttons for foreign machines
 							Button FPortScannerButton = new Button("IP Port Scanner");
 							Button SlowLorisButton = new Button("Slow Loris Attack");
+							//set button color as red because it often fails and crashes the program
+							SlowLorisButton.setStyle("-fx-background-color: #ff0000; ");
 							Button StartHTTPServerButton = new Button("Start/Stop HTTP Server");
 				
 							
