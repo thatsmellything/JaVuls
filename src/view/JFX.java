@@ -104,7 +104,8 @@ public class JFX extends Application{
 							//set button color as red because it often fails and crashes the program
 							SlowLorisButton.setStyle("-fx-background-color: #ff0000; ");
 							Button StartHTTPServerButton = new Button("Start/Stop HTTP Server");
-							Button MD5CrackButton = new Button("MD5 Cracker");
+							Button MD5CrackButtonOn = new Button("MD5 Cracker");
+							Button MD5CrackButtonOff = new Button("Stop Cracker");
 				
 							
 							
@@ -119,7 +120,7 @@ public class JFX extends Application{
 							Label windowsToolsLabel = new Label("Windows Tools");
 							Label linuxToolsLabel = new Label("Linux Tools");
 							Label ServerStatusLabel = new Label("Server Status: Off");
-							Label BruteForceStatusLabel = new Label("Cracking Status: Off");
+							
 							
 							
 							
@@ -178,7 +179,7 @@ public class JFX extends Application{
 						VBox VBoxCracker = new VBox();
 						VBoxCracker.setSpacing(8);
 						ObservableList VBoxCrackerList = VBoxCracker.getChildren();
-						VBoxCrackerList.addAll(MD5CrackButton, BruteForceStatusLabel);
+						VBoxCrackerList.addAll(MD5CrackButtonOn, MD5CrackButtonOff);
 						
 							
 							
@@ -263,20 +264,22 @@ public class JFX extends Application{
 					//Thread to update GUI every 3 seconds
 						Runnable helloRunnable = new Runnable() {
 						    public void run() {
-						        System.out.println("Hello world");
+						        
 						        if(bustEm.isAlive())
 						        {
-						        	BruteForceStatusLabel.setText("Cracking Status: Running");
+						        	System.out.println("The brute forcer is still running");
+						        	//BruteForceStatusLabel.setText("Cracking Status: Running");
 						        }
 						        else
 						        {
-						        	BruteForceStatusLabel.setText("Cracking Status: Off");
+						        	System.out.println("The brute frorcer is not running");
+						        	//BruteForceStatusLabel.setText("Cracking Status: Off");
 						        }
 						    }
 						};
 		
 						ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
-						executor.scheduleAtFixedRate(helloRunnable, 0, 3, TimeUnit.SECONDS);
+						executor.scheduleAtFixedRate(helloRunnable, 0, 1, TimeUnit.SECONDS);
 				
 				//create listeners for buttons
 				StartHTTPServerButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -311,23 +314,23 @@ public class JFX extends Application{
 				    }
 				});
 				
-				MD5CrackButton.setOnAction(new EventHandler<ActionEvent>() {
+				MD5CrackButtonOn.setOnAction(new EventHandler<ActionEvent>() {
 				    @Override public void handle(ActionEvent e) {
-								if(BruteForceStatusLabel.getText().equals("Cracking Status: Off"))
+							    	if(!bustEm.isAlive())
+							    		{
+							    		outputText.setText(outputText.getText()  + newLine + "Brute force service started");
+							    		bustEm.start();
+							    		}
+							}
+				});
+				
+				MD5CrackButtonOff.setOnAction(new EventHandler<ActionEvent>() {
+				    @Override public void handle(ActionEvent e) {
+								if(bustEm.isAlive())
 						    	{
-									outputText.setText(outputText.getText()  + newLine + "Brute force service started");
-									//Platform.runLater(bustEm);
-									bustEm.start();
-									//BruteForceStatusLabel.setText("Cracking Status: Off");
-						    	//outputText.setText(outputText.getText() + crackboi);
-						    }
-						    	else
-						    	{
-						    		BruteForceStatusLabel.setText("Cracking Status: Off");
-						    	//	bustThatCode.stop();
-						    		bustEm.stop();
-						    	}
-								
+									outputText.setText(outputText.getText()  + newLine + "Brute force service stopped");
+									bustEm.stop();
+						    	}	
 							}
 				});
 				
@@ -509,6 +512,12 @@ public class JFX extends Application{
 				primaryStage.setOnCloseRequest(event -> {
 					applications.HTTPServer.stop();
 					outputText.setText(outputText.getText()  + newLine + "HTTP Server Stopped" + newLine + "Shuting Down Application");
+					executor.shutdown();
+					if(bustEm.isAlive())
+			    	{
+						outputText.setText(outputText.getText()  + newLine + "Brute force service stopped");
+						bustEm.stop();
+			    }
 				    System.out.println("Stage is closing");
 				    // Save file
 				});
