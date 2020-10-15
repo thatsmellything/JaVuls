@@ -321,6 +321,10 @@ public class JFX extends Application{
 							    		outputText.setText(outputText.getText()  + newLine + "Brute force service started");
 							    		bustEm.start();
 							    		}
+							    	else
+							    	{
+							    		outputText.setText(outputText.getText()  + newLine +  "The brute forcer is already running");
+							    	}
 							}
 				});
 				
@@ -331,6 +335,10 @@ public class JFX extends Application{
 									outputText.setText(outputText.getText()  + newLine + "Brute force service stopped");
 									bustEm.stop();
 						    	}	
+								else
+						    	{
+						    		outputText.setText(outputText.getText()  + newLine +  "The brute forcer not running");
+						    	}
 							}
 				});
 				
