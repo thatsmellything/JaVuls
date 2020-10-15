@@ -337,7 +337,7 @@ public class JFX extends Application{
 						    	}	
 								else
 						    	{
-						    		outputText.setText(outputText.getText()  + newLine +  "The brute forcer not running");
+						    		outputText.setText(outputText.getText()  + newLine +  "The brute forcer not running my guy");
 						    	}
 							}
 				});
