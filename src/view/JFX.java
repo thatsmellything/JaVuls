@@ -546,6 +546,8 @@ public class JFX extends Application{
 
 /*
 
+Pretty sure that I wasnt getting any credits on github because my account wasnt set up right on git bash :(
+
 public static void printMe(String thingToPrint)
 {
 	outputText.setText(outputText.getText() + thingToPrint);
