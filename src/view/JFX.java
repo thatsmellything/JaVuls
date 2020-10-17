@@ -286,7 +286,7 @@ public class JFX extends Application{
 						        }
 						        else
 						        {
-						        	System.out.println("The brute frorcer is not running");
+						        	System.out.println("The brute forcer is not running");
 						        	//BruteForceStatusLabel.setText("Cracking Status: Off");
 						        }
 						    }
