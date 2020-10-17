@@ -8,12 +8,17 @@ import java.net.InetSocketAddress;
 import java.net.MalformedURLException;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.swing.JOptionPane;
 
 import applications.PublicIPLookupHost;
@@ -288,6 +293,54 @@ public class JFX extends Application{
 						executor.scheduleAtFixedRate(helloRunnable, 0, 1, TimeUnit.SECONDS);
 				
 				//create listeners for buttons
+				AESEncryptButton.setOnAction(new EventHandler<ActionEvent>() {
+				    @Override public void handle(ActionEvent e) {
+				    	String fileOut = directoryFileSpecified.getText() + ".enc";
+				    	try {
+							EncryptDecryptFiles.encryptedFile(MasterTextEntryBox.getText(), directoryFileSpecified.getText(), fileOut);
+							outputText.setText(outputText.getText() + newLine + "Encrypted file: " + directoryFileSpecified.getText() + " with AES" + newLine + "Encryption KEY:" + MasterTextEntryBox.getText() + "<--- DO NOT FORGET THIS" + newLine + "New file created: " + fileOut);
+						} catch (InvalidKeyException e1) {
+							String key = MasterTextEntryBox.getText();
+							int keyNum = key.length();
+							if(keyNum < 16)
+							{
+								int addMore = 16 - keyNum;
+								outputText.setText(outputText.getText() + newLine + "The encryption key needs to be 16 characters long" + newLine + "Current key length is: " + keyNum + newLine + "Please add "+ addMore + " characters");
+							}
+							if(keyNum > 16)
+							{
+								int decrease = keyNum - 16;
+								outputText.setText(outputText.getText() + newLine + "The encryption key needs to be 16 characters long" + newLine + "Current key length is: " + keyNum + newLine + "Please remove "+ decrease + " characters");
+							}
+							
+							e1.printStackTrace();
+						} catch (NoSuchAlgorithmException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (NoSuchPaddingException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (IllegalBlockSizeException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (BadPaddingException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+				    	outputText.setText(outputText.getText());
+				        
+				    }
+				});
+				AESDecryptButton.setOnAction(new EventHandler<ActionEvent>() {
+				    @Override public void handle(ActionEvent e) {
+				    	outputText.setText(outputText.getText());
+				        outputText.setText(outputText.getText() + newLine + WindowsCommandLineIPandPing.windowsARP() + newLine + "Check console output");
+				    }
+				});
+						
 				StartHTTPServerButton.setOnAction(new EventHandler<ActionEvent>() {
 				    @Override public void handle(ActionEvent e) {				    	
 				    	if(ServerStatusLabel.getText().equals("Server Status: Off"))
