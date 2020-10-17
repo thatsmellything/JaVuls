@@ -1,4 +1,4 @@
-package testFiles;
+package applications;
 
 import java.security.MessageDigest;
 

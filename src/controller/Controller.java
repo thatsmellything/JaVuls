@@ -6,8 +6,8 @@ import java.net.UnknownHostException;
 
 import javax.swing.JOptionPane;
 
+import applications.BruteCrack;
 import applications.YourIPLookup;
-import testFiles.BruteCrack;
 
 
 

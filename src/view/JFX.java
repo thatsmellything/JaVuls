@@ -22,6 +22,8 @@ import javax.crypto.NoSuchPaddingException;
 import javax.swing.JOptionPane;
 
 import applications.PublicIPLookupHost;
+import applications.BruteCrack;
+import applications.EncryptDecryptFilesAES;
 import applications.PingURL;
 import applications.PortScanner;
 import applications.ShowProperties;
@@ -298,7 +300,7 @@ public class JFX extends Application{
 				    @Override public void handle(ActionEvent e) {
 				    	String fileOut = directoryFileSpecified.getText() + ".enc";
 				    	try {
-							EncryptDecryptFiles.encryptedFile(MasterTextEntryBox.getText(), directoryFileSpecified.getText(), fileOut);
+							EncryptDecryptFilesAES.encryptedFile(MasterTextEntryBox.getText(), directoryFileSpecified.getText(), fileOut);
 							outputText.setText(outputText.getText() + newLine + "Encrypted file: " + directoryFileSpecified.getText() + " with AES" + newLine + "Encryption KEY:" + MasterTextEntryBox.getText() + "<--- DO NOT FORGET THIS" + newLine + "New file created: " + fileOut + newLine);
 						} catch (InvalidKeyException e1) {
 							String key = MasterTextEntryBox.getText();
@@ -339,7 +341,7 @@ public class JFX extends Application{
 				    @Override public void handle(ActionEvent e) {
 				    	String fileOut = directoryFileSpecified.getText() + portFileoutSpecified.getText();
 				    	try {
-							EncryptDecryptFiles.decryptedFile(MasterTextEntryBox.getText(), directoryFileSpecified.getText(), fileOut);
+							EncryptDecryptFilesAES.decryptedFile(MasterTextEntryBox.getText(), directoryFileSpecified.getText(), fileOut);
 							outputText.setText(outputText.getText() + newLine + "Decrypting file: " + directoryFileSpecified.getText() + " with AES" + newLine + "Encryption KEY:" + MasterTextEntryBox.getText() + newLine + "New file created: " + fileOut +newLine);
 						} catch (InvalidKeyException e1) {
 							String key = MasterTextEntryBox.getText();
