@@ -17,7 +17,7 @@ public class EncryptDecryptFiles {
  public static void main(String[] args) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException,
    IllegalBlockSizeException, BadPaddingException, IOException {
   var key = "jackrutorial.com";
-  
+ 
   System.out.println("File input: " + "D:\\text.txt");
 
   //encryptedFile
