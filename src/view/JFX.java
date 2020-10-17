@@ -73,18 +73,18 @@ public class JFX extends Application{
 				
 				
 					//ADD IMAGE FOR VIEW
-						ImageView statusImage = new ImageView();
+					//	ImageView statusImage = new ImageView();
 						//add height and width of image view
-							statusImage.setFitHeight(200); 
-							statusImage.setFitWidth(200); 
+							//statusImage.setFitHeight(200); 
+							//statusImage.setFitWidth(200); 
 						//Setting the preserve ratio of the image view 
-							statusImage.setPreserveRatio(true);
+							//statusImage.setPreserveRatio(true);
 						//set the default image
-							Image defaultImage = new Image("jparkhack2.gif");
-							Image hackerImageJPark = new Image("jparkhack.gif");
-							Image hackerImageCat = new Image("catHacker.gif");
-							Image hackerImageCat2 = new Image("cat2.gif");
-							statusImage.setImage(defaultImage);
+							//Image defaultImage = new Image("jparkhack2.gif");
+							//Image hackerImageJPark = new Image("jparkhack.gif");
+							//Image hackerImageCat = new Image("catHacker.gif");
+							//Image hackerImageCat2 = new Image("cat2.gif");
+							//statusImage.setImage(defaultImage);
 				
 					
 					//CREATING BUTTONS
@@ -138,7 +138,7 @@ public class JFX extends Application{
 					//CREATING TEXT FIELDS AND THEIR VBOX
 						//foreign IP
 							TextField MasterTextEntryBox = new TextField();
-							MasterTextEntryBox.setText("IP/URL/HASH");
+							MasterTextEntryBox.setText("IP/URL/HASH/ENCRYPTION KEY");
 							String FIPtext = MasterTextEntryBox.getText();
 						//number of threads allowed
 							Label threadLabel = new Label("Number of threads");
@@ -492,7 +492,7 @@ public class JFX extends Application{
 				    @Override public void handle(ActionEvent e) {
 				    	Thread localPortScannerThread = new Thread(new Runnable() {
 							public void run() {
-								statusImage.setImage(hackerImageJPark);
+								//statusImage.setImage(hackerImageJPark);
 						    	outputText.setText(outputText.getText());
 						    	outputText.setText(outputText.getText() + "This part of the program functions best when the threads allowed is set to 0. This will let the computer make threads until it no longer needs them and is the optimal way to save memory and still have the best speed. Having too many threads will cause a memory leakage while having too little will cause a slow scan.");
 						        try {
@@ -558,7 +558,7 @@ public class JFX extends Application{
 				    @Override public void handle(ActionEvent e) {
 				    	Thread FPortScannerThread = new Thread(new Runnable() {
 							public void run() {
-								statusImage.setImage(hackerImageJPark);
+								//statusImage.setImage(hackerImageJPark);
 						    	JOptionPane.showMessageDialog(null, "THIS TOOL IS ONLY TO BE USED ON MACHINES AND APPLICATIONS WITH PERMISSION! Port scanning can be noisey");
 								outputText.setText(outputText.getText());
 						    	outputText.setText(outputText.getText() + "This part of the program functions best when the threads allowed is set to 0. This will let the computer make threads until it no longer needs them and is the optimal way to save memory and still have the best speed. Having too many threads will cause a memory leakage while having too little will cause a slow scan.");
