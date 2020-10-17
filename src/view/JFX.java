@@ -150,7 +150,7 @@ public class JFX extends Application{
 								ObservableList VBoxThreadsList = VBoxThreads.getChildren();
 								VBoxThreadsList.addAll(threadLabel, threadsAllowed);
 						//port number
-							Label portLabel = new Label("Port to attack/host");
+							Label portLabel = new Label("Port to attack/host/file out extension");
 							TextField portSpecified = new TextField();
 							portSpecified.setText("8000");
 							//create vbox for port number and label
@@ -336,8 +336,41 @@ public class JFX extends Application{
 				});
 				AESDecryptButton.setOnAction(new EventHandler<ActionEvent>() {
 				    @Override public void handle(ActionEvent e) {
-				    	outputText.setText(outputText.getText());
-				        outputText.setText(outputText.getText() + newLine + WindowsCommandLineIPandPing.windowsARP() + newLine + "Check console output");
+				    	String fileOut = directoryFileSpecified.getText() + portSpecified.getText();
+				    	try {
+							EncryptDecryptFiles.decryptedFile(MasterTextEntryBox.getText(), directoryFileSpecified.getText(), fileOut);
+							outputText.setText(outputText.getText() + newLine + "Decrypting file: " + directoryFileSpecified.getText() + " with AES" + newLine + "Encryption KEY:" + MasterTextEntryBox.getText() + newLine + "New file created: " + fileOut);
+						} catch (InvalidKeyException e1) {
+							String key = MasterTextEntryBox.getText();
+							int keyNum = key.length();
+							if(keyNum < 16)
+							{
+								int addMore = 16 - keyNum;
+								outputText.setText(outputText.getText() + newLine + "The encryption key needs to be 16 characters long" + newLine + "Current key length is: " + keyNum + newLine + "Please add "+ addMore + " characters");
+							}
+							if(keyNum > 16)
+							{
+								int decrease = keyNum - 16;
+								outputText.setText(outputText.getText() + newLine + "The encryption key needs to be 16 characters long" + newLine + "Current key length is: " + keyNum + newLine + "Please remove "+ decrease + " characters");
+							}
+							
+							e1.printStackTrace();
+						} catch (NoSuchAlgorithmException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (NoSuchPaddingException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (IllegalBlockSizeException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (BadPaddingException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 				    }
 				});
 						
