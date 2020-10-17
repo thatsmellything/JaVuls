@@ -272,6 +272,7 @@ public class JFX extends Application{
 								String crackboi = BruteCrack.test(MasterTextEntryBox.getText());
 							}
 						});
+						//I may have broken something
 					//Thread to update GUI every 3 seconds
 						Runnable helloRunnable = new Runnable() {
 						    public void run() {
