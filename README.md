@@ -27,6 +27,10 @@ Shortcuts (windows)
 
 HTTP Server
 
+AES Encryption/Decryption
+
+MD5 Brute Force
+
 # CREDITS
 This project was not done alone. Many of the applications have been borrowed and culminated into this singular project. All of them before hand were not in GUI form and have gone through some alterations to work within this project. Credit is where credit is due and I will add contributers here along with their githgub projet if available! Thank you so much it would not be posssible without you! :)
 
