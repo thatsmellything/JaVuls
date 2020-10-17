@@ -106,6 +106,8 @@ public class JFX extends Application{
 							Button StartHTTPServerButton = new Button("Start/Stop HTTP Server");
 							Button MD5CrackButtonOn = new Button("MD5 Cracker");
 							Button MD5CrackButtonOff = new Button("Stop Cracker");
+							Button AESEncryptButton = new Button("AES Encrypt");
+							Button AESDecryptButton = new Button("AES Decrypt");
 				
 							
 							
@@ -139,7 +141,7 @@ public class JFX extends Application{
 							threadsAllowed.setText("0");
 							//create vbox for threads and thread label
 								VBox VBoxThreads = new VBox();
-								VBoxThreads.setSpacing(8);
+								VBoxThreads.setSpacing(7);
 								ObservableList VBoxThreadsList = VBoxThreads.getChildren();
 								VBoxThreadsList.addAll(threadLabel, threadsAllowed);
 						//port number
@@ -148,7 +150,7 @@ public class JFX extends Application{
 							portSpecified.setText("8000");
 							//create vbox for port number and label
 								VBox VBoxPort = new VBox();
-								VBoxPort.setSpacing(8);
+								VBoxPort.setSpacing(7);
 								ObservableList VBoxPortList = VBoxThreads.getChildren();
 								VBoxPortList.addAll(portLabel, portSpecified);
 						//time allowed to attack	
@@ -157,18 +159,18 @@ public class JFX extends Application{
 							timeAllowed.setText("0");
 							//create vbox for time allowed
 								VBox VBoxTime = new VBox();
-								VBoxTime.setSpacing(8);
+								VBoxTime.setSpacing(7);
 								ObservableList VBoxTimeList = VBoxTime.getChildren();
 								VBoxTimeList.addAll(timeLabel, timeAllowed);
 						//server directory
-							Label serverDirectoryLabel = new Label("Server Directory");
-							TextField directorySpecified = new TextField();
-							directorySpecified.setText("C:\\Users");
+							Label directoryFileLabel = new Label("Directory/File");
+							TextField directoryFileSpecified = new TextField();
+							directoryFileSpecified.setText("C:\\Users");
 							//Create vbox for server directory
 								VBox VBoxServerDirectory = new VBox();
-								VBoxServerDirectory.setSpacing(8);
+								VBoxServerDirectory.setSpacing(7);
 								ObservableList VBoxServerDirectoryList = VBoxServerDirectory.getChildren();
-								VBoxServerDirectoryList.addAll(serverDirectoryLabel, directorySpecified);
+								VBoxServerDirectoryList.addAll(directoryFileLabel, directoryFileSpecified);
 								
 							//Create new VBOX for server button and server status indicator
 								VBox ServerButtonAndStatus = new VBox();
@@ -177,10 +179,14 @@ public class JFX extends Application{
 								ServerToolsList.addAll(StartHTTPServerButton, ServerStatusLabel);
 						//VBox for brute force Status and button
 						VBox VBoxCracker = new VBox();
-						VBoxCracker.setSpacing(8);
+						VBoxCracker.setSpacing(7);
 						ObservableList VBoxCrackerList = VBoxCracker.getChildren();
 						VBoxCrackerList.addAll(MD5CrackButtonOn, MD5CrackButtonOff);
-						
+						//VBox for AES Encrypt and Decrypt Buttons
+						VBox VBoxAES = new VBox();
+						VBoxAES.setSpacing(7);
+						ObservableList VBoxAESList = VBoxAES.getChildren();
+						VBoxAESList.addAll(AESEncryptButton, AESDecryptButton);
 							
 							
 							
@@ -200,14 +206,14 @@ public class JFX extends Application{
 				HBox HBoxFTools = new HBox();
 				HBoxFTools.setSpacing(10);
 				ObservableList FToolsList = HBoxFTools.getChildren(); //retrieving the observable list of the VBox 
-				FToolsList.addAll(FPortScannerButton, SlowLorisButton, ServerButtonAndStatus, VBoxCracker, PingURLButton);
+				FToolsList.addAll(FPortScannerButton, SlowLorisButton, ServerButtonAndStatus, VBoxCracker, PingURLButton, VBoxAES);
 				
 				
 				//create hbox for labels
 				HBox HBoxFToolsLabels = new HBox();
 				HBoxFToolsLabels.setSpacing(5);
 				ObservableList FToolsLabelList = HBoxFToolsLabels.getChildren();
-				FToolsLabelList.addAll(VBoxThreads,VBoxTime, VBoxPort, VBoxServerDirectory, statusImage);
+				FToolsLabelList.addAll(VBoxThreads,VBoxTime, VBoxPort, VBoxServerDirectory);
 				
 				
 				
@@ -287,7 +293,7 @@ public class JFX extends Application{
 				    	if(ServerStatusLabel.getText().equals("Server Status: Off"))
 				    	{
 				    	
-				    	applications.HTTPServer.startServerUpInGUI(directorySpecified.getText(), portSpecified.getText());
+				    	applications.HTTPServer.startServerUpInGUI(directoryFileSpecified.getText(), portSpecified.getText());
 				    	ServerStatusLabel.setText("Server Status: On");
 				    	try {
 							outputText.setText(outputText.getText()  + newLine + "HTTP Server Started At:" + newLine + "http://" + YourIPLookup.viewMyIP() + ":" + portSpecified.getText() );
