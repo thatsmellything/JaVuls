@@ -151,13 +151,13 @@ public class JFX extends Application{
 								VBoxThreadsList.addAll(threadLabel, threadsAllowed);
 						//port number
 							Label portLabel = new Label("Port to attack/host/file out extension");
-							TextField portSpecified = new TextField();
-							portSpecified.setText("8000");
+							TextField portFileoutSpecified = new TextField();
+							portFileoutSpecified.setText("8000");
 							//create vbox for port number and label
 								VBox VBoxPort = new VBox();
 								VBoxPort.setSpacing(7);
 								ObservableList VBoxPortList = VBoxThreads.getChildren();
-								VBoxPortList.addAll(portLabel, portSpecified);
+								VBoxPortList.addAll(portLabel, portFileoutSpecified);
 						//time allowed to attack	
 							Label timeLabel = new Label("Time for Attack");
 							TextField timeAllowed = new TextField();
@@ -299,19 +299,19 @@ public class JFX extends Application{
 				    	String fileOut = directoryFileSpecified.getText() + ".enc";
 				    	try {
 							EncryptDecryptFiles.encryptedFile(MasterTextEntryBox.getText(), directoryFileSpecified.getText(), fileOut);
-							outputText.setText(outputText.getText() + newLine + "Encrypted file: " + directoryFileSpecified.getText() + " with AES" + newLine + "Encryption KEY:" + MasterTextEntryBox.getText() + "<--- DO NOT FORGET THIS" + newLine + "New file created: " + fileOut);
+							outputText.setText(outputText.getText() + newLine + "Encrypted file: " + directoryFileSpecified.getText() + " with AES" + newLine + "Encryption KEY:" + MasterTextEntryBox.getText() + "<--- DO NOT FORGET THIS" + newLine + "New file created: " + fileOut + newLine);
 						} catch (InvalidKeyException e1) {
 							String key = MasterTextEntryBox.getText();
 							int keyNum = key.length();
 							if(keyNum < 16)
 							{
 								int addMore = 16 - keyNum;
-								outputText.setText(outputText.getText() + newLine + "The encryption key needs to be 16 characters long" + newLine + "Current key length is: " + keyNum + newLine + "Please add "+ addMore + " characters");
+								outputText.setText(outputText.getText() + newLine + "The encryption key needs to be 16 characters long" + newLine + "Current key length is: " + keyNum + newLine + "Please add "+ addMore + " characters" + newLine);
 							}
 							if(keyNum > 16)
 							{
 								int decrease = keyNum - 16;
-								outputText.setText(outputText.getText() + newLine + "The encryption key needs to be 16 characters long" + newLine + "Current key length is: " + keyNum + newLine + "Please remove "+ decrease + " characters");
+								outputText.setText(outputText.getText() + newLine + "The encryption key needs to be 16 characters long" + newLine + "Current key length is: " + keyNum + newLine + "Please remove "+ decrease + " characters" + newLine);
 							}
 							
 							e1.printStackTrace();
@@ -337,22 +337,22 @@ public class JFX extends Application{
 				});
 				AESDecryptButton.setOnAction(new EventHandler<ActionEvent>() {
 				    @Override public void handle(ActionEvent e) {
-				    	String fileOut = directoryFileSpecified.getText() + portSpecified.getText();
+				    	String fileOut = directoryFileSpecified.getText() + portFileoutSpecified.getText();
 				    	try {
 							EncryptDecryptFiles.decryptedFile(MasterTextEntryBox.getText(), directoryFileSpecified.getText(), fileOut);
-							outputText.setText(outputText.getText() + newLine + "Decrypting file: " + directoryFileSpecified.getText() + " with AES" + newLine + "Encryption KEY:" + MasterTextEntryBox.getText() + newLine + "New file created: " + fileOut);
+							outputText.setText(outputText.getText() + newLine + "Decrypting file: " + directoryFileSpecified.getText() + " with AES" + newLine + "Encryption KEY:" + MasterTextEntryBox.getText() + newLine + "New file created: " + fileOut +newLine);
 						} catch (InvalidKeyException e1) {
 							String key = MasterTextEntryBox.getText();
 							int keyNum = key.length();
 							if(keyNum < 16)
 							{
 								int addMore = 16 - keyNum;
-								outputText.setText(outputText.getText() + newLine + "The encryption key needs to be 16 characters long" + newLine + "Current key length is: " + keyNum + newLine + "Please add "+ addMore + " characters");
+								outputText.setText(outputText.getText() + newLine + "The encryption key needs to be 16 characters long" + newLine + "Current key length is: " + keyNum + newLine + "Please add "+ addMore + " characters" + newLine);
 							}
 							if(keyNum > 16)
 							{
 								int decrease = keyNum - 16;
-								outputText.setText(outputText.getText() + newLine + "The encryption key needs to be 16 characters long" + newLine + "Current key length is: " + keyNum + newLine + "Please remove "+ decrease + " characters");
+								outputText.setText(outputText.getText() + newLine + "The encryption key needs to be 16 characters long" + newLine + "Current key length is: " + keyNum + newLine + "Please remove "+ decrease + " characters" + newLine);
 							}
 							
 							e1.printStackTrace();
@@ -380,10 +380,10 @@ public class JFX extends Application{
 				    	if(ServerStatusLabel.getText().equals("Server Status: Off"))
 				    	{
 				    	
-				    	applications.HTTPServer.startServerUpInGUI(directoryFileSpecified.getText(), portSpecified.getText());
+				    	applications.HTTPServer.startServerUpInGUI(directoryFileSpecified.getText(), portFileoutSpecified.getText());
 				    	ServerStatusLabel.setText("Server Status: On");
 				    	try {
-							outputText.setText(outputText.getText()  + newLine + "HTTP Server Started At:" + newLine + "http://" + YourIPLookup.viewMyIP() + ":" + portSpecified.getText() );
+							outputText.setText(outputText.getText()  + newLine + "HTTP Server Started At:" + newLine + "http://" + YourIPLookup.viewMyIP() + ":" + portFileoutSpecified.getText() );
 						} catch (UnknownHostException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
@@ -602,8 +602,8 @@ public class JFX extends Application{
 				    @Override public void handle(ActionEvent e) {
 				    	outputText.setText(outputText.getText());
 				    	JOptionPane.showMessageDialog(null, "THIS TOOL IS ONLY TO BE USED ON MACHINES AND APPLICATIONS WITH PERMISSION");
-				        outputText.setText(outputText.getText() + "Running slow loris attack on " + MasterTextEntryBox.getText() + " on port " + portSpecified.getText() + " with " + threadsAllowed.getText() + " threads for " + timeAllowed.getText() + " time. Please use responsibly and with permission from the owner.");
-				        SlowLoris.slowLorisRun(MasterTextEntryBox.getText(), portSpecified.getText(), threadsAllowed.getText(), timeAllowed.getText());
+				        outputText.setText(outputText.getText() + "Running slow loris attack on " + MasterTextEntryBox.getText() + " on port " + portFileoutSpecified.getText() + " with " + threadsAllowed.getText() + " threads for " + timeAllowed.getText() + " time. Please use responsibly and with permission from the owner.");
+				        SlowLoris.slowLorisRun(MasterTextEntryBox.getText(), portFileoutSpecified.getText(), threadsAllowed.getText(), timeAllowed.getText());
 				    }
 				});
 				
