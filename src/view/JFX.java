@@ -111,8 +111,8 @@ public class JFX extends Application{
 							//set button color as red because it often fails and crashes the program
 							SlowLorisButton.setStyle("-fx-background-color: #ff0000; ");
 							Button StartHTTPServerButton = new Button("Start/Stop HTTP Server");
-							Button MD5CrackButtonOn = new Button("MD5 Cracker");
-							Button MD5CrackButtonOff = new Button("Stop Cracker");
+							Button MD5CrackButtonOn = new Button("Start");
+							Button MD5CrackButtonOff = new Button("Stop");
 							Button AESEncryptButton = new Button("AES Encrypt");
 							Button AESDecryptButton = new Button("AES Decrypt");
 				
@@ -185,10 +185,16 @@ public class JFX extends Application{
 								ObservableList ServerToolsList = ServerButtonAndStatus.getChildren();
 								ServerToolsList.addAll(StartHTTPServerButton, ServerStatusLabel);
 						//VBox for brute force Status and button
-						VBox VBoxCracker = new VBox();
-						VBoxCracker.setSpacing(7);
-						ObservableList VBoxCrackerList = VBoxCracker.getChildren();
-						VBoxCrackerList.addAll(MD5CrackButtonOn, MD5CrackButtonOff);
+								HBox HBoxCracker = new HBox();
+								HBoxCracker.setSpacing(7);
+								ObservableList HBoxCrackerList = HBoxCracker.getChildren();
+								HBoxCrackerList.addAll(MD5CrackButtonOn, MD5CrackButtonOff);
+							Label MD5OnOffLabel = new Label("MD5 Crack: Off");
+							VBox VBoxCracker = new VBox();
+							VBoxCracker.setSpacing(7);
+							ObservableList VBoxCrackerList = VBoxCracker.getChildren();
+							VBoxCrackerList.addAll(MD5OnOffLabel, HBoxCracker);
+							
 						//VBox for AES Encrypt and Decrypt Buttons
 						VBox VBoxAES = new VBox();
 						VBoxAES.setSpacing(7);
@@ -276,24 +282,26 @@ public class JFX extends Application{
 						});
 						//I may have broken something
 					//Thread to update GUI every 3 seconds
+						/*
 						Runnable helloRunnable = new Runnable() {
 						    public void run() {
 						        
 						        if(bustEm.isAlive())
 						        {
-						        	System.out.println("The brute forcer is still running");
-						        	//BruteForceStatusLabel.setText("Cracking Status: Running");
+						        	//System.out.println("The brute forcer is still running");
+						        	//MD5OnOffLabel.setText("MD5 Crack: On");
 						        }
 						        else
 						        {
-						        	System.out.println("The brute forcer is not running");
-						        	//BruteForceStatusLabel.setText("Cracking Status: Off");
+						        	//System.out.println("The brute forcer is not running");
+						        	//MD5OnOffLabel.setText("MD5 Crack: Off");
 						        }
 						    }
 						};
 		
 						ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
 						executor.scheduleAtFixedRate(helloRunnable, 0, 1, TimeUnit.SECONDS);
+						*/
 				
 				//create listeners for buttons
 				AESEncryptButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -413,6 +421,7 @@ public class JFX extends Application{
 				    @Override public void handle(ActionEvent e) {
 							    	if(!bustEm.isAlive())
 							    		{
+							    		MD5OnOffLabel.setText("MD5 Crack: On");
 							    		outputText.setText(outputText.getText()  + newLine + "Brute force service started");
 							    		bustEm.start();
 							    		}
@@ -427,6 +436,7 @@ public class JFX extends Application{
 				    @Override public void handle(ActionEvent e) {
 								if(bustEm.isAlive())
 						    	{
+									MD5OnOffLabel.setText("MD5 Crack: Off");
 									outputText.setText(outputText.getText()  + newLine + "Brute force service stopped");
 									bustEm.stop();
 						    	}	
@@ -615,7 +625,7 @@ public class JFX extends Application{
 				primaryStage.setOnCloseRequest(event -> {
 					applications.HTTPServer.stop();
 					outputText.setText(outputText.getText()  + newLine + "HTTP Server Stopped" + newLine + "Shuting Down Application");
-					executor.shutdown();
+					//executor.shutdown();
 					if(bustEm.isAlive())
 			    	{
 						outputText.setText(outputText.getText()  + newLine + "Brute force service stopped");
