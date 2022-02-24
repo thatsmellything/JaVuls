@@ -2,7 +2,7 @@
 JaVuls is a large culmination of penetration and network analysis tools put together in GUI form. These are some of the things that I use very often within my (limited) pentesting career. This was really a final project for a Java GUIs class but I have continued to try and update it to the best of my ability when I have time adding more and more tools as I go. I hope you all find this tool useful and if not that then at least a little cool. 
 
 # USAGE
-You will need JRE version 10.0.2 or later (since Java is backwards compatible) for this application to work. You can compile your own .jar file with the source code provided or just use the .jar file within the repo. It should be relativly updated and working whenever large changes occur. 
+You will need JRE version 10.0.2 or later (JavaFX discontinued in java 11 so you will need a version of java 10 that is 10.0.2 or newer) for this application to work. You can compile your own .jar file with the source code provided or just use the .jar file within the repo. It should be relativly updated and working whenever large changes occur. 
 
 $ java -jar JaVuls.jar
 
